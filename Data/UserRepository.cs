@@ -86,9 +86,14 @@ namespace DotNetApi.Data
                         VerificationToken = verificationToken
                     };
 
-                    // Send Verification Email
+                    // Send Account Verification Email
+
                     Task.Run(() => _emailService.SendEmailAsync(email, "Verify Your Email",
-                        $"Click the link to verify: http://localhost:4000/guest/verify?token={verificationToken}&email={email}"));
+            $@"<p style='font-size: 16px; color: #333;'>Click the link below to reset your password:</p>
+                <p><a href='http://localhost:4000/guest/verify?token={verificationToken}&email={email}'
+                    style='display: inline-block; padding: 10px 20px; background-color: #007bff; color: #ffffff; 
+                    text-decoration: none; font-size: 16px; border-radius: 5px;' target='_blank'>Reset Password</a></p>
+                <p>If you didn't request a password reset, you can ignore this email.</p>"));
 
                     return user;
                 }
@@ -108,7 +113,7 @@ namespace DotNetApi.Data
                 try
                 {
                     conn.Open();
-                    string query = "SELECT id, name, email, role, email_verified_at  FROM users WHERE email = @email LIMIT 1;";
+                    string query = "SELECT id, name, email, role, email_verified_at, remember_token  FROM users WHERE email = @email LIMIT 1;";
 
                     using MySqlCommand cmd = new(query, conn);
                     cmd.Parameters.AddWithValue("@email", email);
@@ -122,6 +127,8 @@ namespace DotNetApi.Data
                             Name = reader.GetString("name"),
                             Email = reader.GetString("email"),
                             Role = reader.GetString("role"),
+                            Token = reader.IsDBNull(reader.GetOrdinal("remember_token"))
+                        ? null : reader.GetString("remember_token"),
                             EmailVerifiedAt = reader.IsDBNull(reader.GetOrdinal("email_verified_at"))
                         ? null
                         : reader.GetDateTime(reader.GetOrdinal("email_verified_at"))
@@ -203,7 +210,68 @@ namespace DotNetApi.Data
             }
         }
 
+        public bool SendResetPasswordEmail(string email)
+        {
+            string verificationToken = Guid.NewGuid().ToString();
 
+            using (MySqlConnection conn = _database.GetConnection())
+            {
+                try
+                {
+                    conn.Open();
+                    string query = "Update users set remember_token = @token WHERE email = @email";
+
+                    using MySqlCommand cmd = new(query, conn);
+                    cmd.Parameters.AddWithValue("@token", verificationToken);
+                    cmd.Parameters.AddWithValue("@email", email);
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    if (rowsAffected == 0)
+                    {
+                        return false;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("❌ Database Error: " + ex.Message);
+                    return false;
+                }
+            }
+            Task.Run(() => _emailService.SendEmailAsync(email, "Reset Your Password",
+                $@"<p style='font-size: 16px; color: #333;'>Click the link below to reset your password:</p>
+                <p><a href='http://localhost:4000/guest/reset-password?token={verificationToken}&email={email}'
+                    style='display: inline-block; padding: 10px 20px; background-color: #007bff; color: #ffffff; 
+                    text-decoration: none; font-size: 16px; border-radius: 5px;' target='_blank'>Reset Password</a></p>
+                <p>If you didn't request a password reset, you can ignore this email.</p>"));
+
+
+            return true;
+        }
+
+        public bool UpdatePassword(string email, string token, string password)
+        {
+            using MySqlConnection conn = _database.GetConnection();
+            try
+            {
+                conn.Open();
+                string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
+                string query = "UPDATE users SET password=@password,remember_token=null WHERE email=@email AND remember_token=@token";
+                using MySqlCommand cmd = new(query, conn);
+                cmd.Parameters.AddWithValue("@email", email);
+                cmd.Parameters.AddWithValue("@password", hashedPassword);
+                cmd.Parameters.AddWithValue("@token", token);
+                int rowsAffected = cmd.ExecuteNonQuery();
+                if (rowsAffected == 0)
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("❌ Database Error: " + ex.Message);
+                return false;
+            }
+            return true;
+        }
     }
 }
 

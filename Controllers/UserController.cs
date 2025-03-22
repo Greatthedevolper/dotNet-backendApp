@@ -8,6 +8,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Identity.Data;
 
 namespace DotNetApi.Controllers // ✅ Ensure correct namespace
 {
@@ -83,7 +84,7 @@ namespace DotNetApi.Controllers // ✅ Ensure correct namespace
 
             return Ok(new { status = true, message = "Login successful.", token, user = user });
         }
-        [HttpPost("verify")]
+        [HttpPost("verify-account")]
         public IActionResult VerifyUser([FromBody] VerifyRequest model)
         {
             if (string.IsNullOrEmpty(model.Email) || string.IsNullOrEmpty(model.Token))
@@ -96,6 +97,10 @@ namespace DotNetApi.Controllers // ✅ Ensure correct namespace
             {
                 return Unauthorized(new { status = false, message = "Email doesn't exist." });
             }
+            if (user?.EmailVerifiedAt != null)
+            {
+                return Ok(new { status = true, message = "Account is already verified" });
+            }
 
             bool verified = _userRepository.VerifyUserEmail(model.Email, model.Token);
             if (!verified)
@@ -105,6 +110,79 @@ namespace DotNetApi.Controllers // ✅ Ensure correct namespace
 
             return Ok(new { status = true, message = "Email verified successfully." });
         }
+
+        [HttpPost("forgot-password")]
+        public IActionResult ForgetPassword([FromBody] ForgotPassword model)
+        {
+            if (string.IsNullOrEmpty(model.Email))
+            {
+                return BadRequest(new { status = false, message = "Email is required." });
+            }
+            var user = _userRepository.GetUserByEmail(model.Email);
+            if (user == null)
+            {
+                return Unauthorized(new { status = false, message = "Email doesn't exist." });
+            }
+            if (user?.EmailVerifiedAt == null)
+            {
+                return Unauthorized(new { status = false, message = "please verify your email before resetting password." });
+            }
+            bool emailSent = _userRepository.SendResetPasswordEmail(model.Email);
+            if (!emailSent)
+            {
+                return StatusCode(500, new { status = false, message = "Failed to send reset password email." });
+            }
+            return Ok(new { status = true, message = "Reset password link sent to your email." });
+        }
+
+        [HttpPost("reset-password")]
+        public IActionResult ResetPassword([FromBody] ResetPasswordRequest model)
+        {
+            if (string.IsNullOrEmpty(model.Email))
+            {
+                return BadRequest(new { status = false, message = "Email is required." });
+            }
+            var user = _userRepository.GetUserByEmail(model.Email);
+            if (user == null)
+            {
+                return Unauthorized(new { status = false, message = "Email doesn't exist." });
+            }
+            if (user?.EmailVerifiedAt == null)
+            {
+                return Unauthorized(new { status = false, message = "please verify your email before resetting password." });
+            }
+            if (string.IsNullOrEmpty(model.Token))
+            {
+                return BadRequest(new { status = false, message = "Token is required." });
+            }
+            if (user?.Token != model.Token)
+            {
+                return Unauthorized(new { status = false, message = "Invalid or expired token." });
+            }
+            if (string.IsNullOrEmpty(model.NewPassword))
+            {
+                return BadRequest(new { status = false, message = "New Password is required." });
+            }
+            if (string.IsNullOrEmpty(model.ConfirmPassword))
+            {
+                return BadRequest(new { status = false, message = "Confirm Password is required." });
+            }
+            if (model.ConfirmPassword != model.NewPassword)
+            {
+                return BadRequest(new { status = false, message = "New Password And Confirm Password are not matched." });
+            }
+
+            bool updated = _userRepository.UpdatePassword(model.Email, model.Token, model.NewPassword);
+            if (!updated)
+            {
+                return StatusCode(500, new { status = false, message = "Failed to reset password." });
+            }
+            return Ok(new { status = true, message = "password reset successfully" });
+        }
+
+
+
+
 
         private string GenerateJwtToken(User user)
         {
@@ -138,6 +216,17 @@ namespace DotNetApi.Controllers // ✅ Ensure correct namespace
         {
             public string? Email { get; set; }
             public string? Token { get; set; }
+        }
+        public class ResetPasswordRequest
+        {
+            public string? Email { get; set; }
+            public string? Token { get; set; }
+            public string? NewPassword { get; set; }
+            public string? ConfirmPassword { get; set; }
+        }
+        public class ForgotPassword
+        {
+            public string? Email { get; set; }
         }
 
     }
