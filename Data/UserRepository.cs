@@ -274,6 +274,103 @@ namespace DotNetApi.Data
             }
             return true;
         }
+        public PaginatedResponse GetUserListings(int page, int pageSize, string search, int userId)
+        {
+            List<Listing> listings = new List<Listing>();
+            int totalCount = 0;
+
+            using (MySqlConnection conn = _database.GetConnection())
+            {
+                try
+                {
+                    conn.Open();
+                    int offset = (page - 1) * pageSize;
+
+                    // Query to fetch total count (for pagination)
+                    string countQuery = @"
+                SELECT COUNT(*) FROM listings
+                WHERE user_id = @userId 
+                AND (@Search IS NULL OR @Search = '' OR title LIKE @Search OR tags LIKE @Search OR `desc` LIKE @Search);
+            ";
+
+                    using (MySqlCommand countCmd = new(countQuery, conn))
+                    {
+                        countCmd.Parameters.AddWithValue("@userId", userId);
+                        countCmd.Parameters.AddWithValue("@Search", string.IsNullOrEmpty(search) ? "" : $"%{search}%");
+                        totalCount = Convert.ToInt32(countCmd.ExecuteScalar());
+                    }
+
+                    // Fetch paginated listings
+                    string query = @"
+                SELECT * FROM listings
+                WHERE user_id = @userId 
+                AND (@Search IS NULL OR @Search = '' OR title LIKE @Search OR tags LIKE @Search OR `desc` LIKE @Search)
+                ORDER BY created_at DESC
+                LIMIT @pageSize OFFSET @offset;
+            ";
+
+                    using (MySqlCommand cmd = new(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@userId", userId);
+                        cmd.Parameters.AddWithValue("@Search", string.IsNullOrEmpty(search) ? "" : $"%{search}%");
+                        cmd.Parameters.AddWithValue("@pageSize", pageSize);
+                        cmd.Parameters.AddWithValue("@offset", offset);
+
+                        using MySqlDataReader reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            listings.Add(new Listing
+                            {
+                                Id = reader.GetInt32("id"),
+                                UserId = reader.GetInt32("user_id"),
+                                Title = reader.GetString("title"),
+                                Desc = reader.GetString("desc"),
+                                Tags = reader.GetString("tags"),
+                                Email = reader.GetString("email"),
+                                Link = reader.GetString("link"),
+                                Image = reader.IsDBNull(reader.GetOrdinal("image")) ? null : reader.GetString("image"),
+                                Approved = reader.GetInt32("approved"),
+                                CreatedAt = reader.GetDateTime("created_at"),
+                                UpdatedAt = reader.GetDateTime("updated_at")
+                            });
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("❌ Database Error: " + ex.Message);
+                    return new PaginatedResponse
+                    {
+                        Message = "Database error occurred.",
+                        StatusCode = 500,
+                        Data = new { listings = new List<Listing>() },
+                        CurrentPage = page,
+                        PageSize = pageSize,
+                        TotalCount = 0,
+                        TotalPages = 0,
+                        HasPrevious = false,
+                        HasNext = false
+                    };
+                }
+            }
+
+            // Pagination logic
+            int totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
+
+            return new PaginatedResponse
+            {
+                Message = "Listings fetched successfully.",
+                StatusCode = 200,
+                Data = new { listings },
+                CurrentPage = page,
+                PageSize = pageSize,
+                TotalCount = totalCount,
+                TotalPages = totalPages,
+                HasPrevious = page > 1,
+                HasNext = page < totalPages
+            };
+        }
+
     }
 }
 

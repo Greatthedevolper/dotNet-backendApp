@@ -211,17 +211,74 @@ namespace DotNetApi.Controllers // ✅ Ensure correct namespace
         }
 
 
+        // [Authorize]
+        [HttpGet("dashboard")]
+        public IActionResult Dashboard([FromQuery] int page = 1, [FromQuery] int pageSize = 10, [FromQuery] string search = "")
+        {
+
+            var userEmail = User.FindFirstValue(JwtRegisteredClaimNames.Email) ?? User.FindFirstValue(ClaimTypes.Email);
+            var userIdClaim = User.FindFirstValue("user_id");
+
+            if (string.IsNullOrEmpty(userEmail) || string.IsNullOrEmpty(userIdClaim))
+            {
+                return Unauthorized(new { status = false, message = "User email or user ID is not available in JWT." });
+            }
+
+            if (!int.TryParse(userIdClaim, out int userId))
+            {
+                return Unauthorized(new { status = false, message = "Invalid user ID format." });
+            }
+
+            var user = _userRepository.GetUserByEmail(userEmail);
+            if (user == null)
+            {
+                return Unauthorized(new { status = false, message = "Email is not registered." });
+            }
+
+            if (user.Id != userId)
+            {
+                return Unauthorized(new { status = false, message = "User ID mismatch." });
+            }
+
+            if (!string.Equals(user.Role, "user", StringComparison.OrdinalIgnoreCase))
+            {
+                return Unauthorized(new { status = false, message = "You are not authorized to access this resource." });
+            }
+
+            var result = _userRepository.GetUserListings(page, pageSize, search, userId);
+            if (result == null || result.Data == null || ((dynamic)result.Data).listings.Count == 0)
+            {
+                return NotFound(new
+                {
+                    message = "No listings found.",
+                    statusCode = 404,
+                    data = new { listings = new List<Listing>(), top4Listings = new List<object>() },
+                    currentPage = page,
+                    pageSize = pageSize,
+                    totalCount = 0,
+                    totalPages = 0,
+                    hasPrevious = false,
+                    hasNext = false
+                });
+            }
+
+            return Ok(result);
+        }
+
+
 
         static string GenerateJwtToken(User user)
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("95c6ce46bc28fe3cad21b6460c30b92a"));
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             const string ProfilePictureClaimType = "profile_picture";
+
             var claims = new[]
             {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Email),
-                new Claim(JwtRegisteredClaimNames.Jti, System.Guid.NewGuid().ToString()),
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(JwtRegisteredClaimNames.Sub, user.Email), // Subject is email
+                new Claim(JwtRegisteredClaimNames.Jti, System.Guid.NewGuid().ToString()), // Unique token ID
+                new Claim(ClaimTypes.NameIdentifier, user.Email), // Store email as NameIdentifier
+                new Claim("user_id", user.Id.ToString()), // Store numeric user ID as a custom claim
                 new Claim(ClaimTypes.Name, user.Name),
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.Role, user.Role ?? "User"),
@@ -238,6 +295,7 @@ namespace DotNetApi.Controllers // ✅ Ensure correct namespace
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
         public class RegisterRequest
         {
             public string? Name { get; set; }
@@ -264,6 +322,10 @@ namespace DotNetApi.Controllers // ✅ Ensure correct namespace
         public class ForgotPassword
         {
             public string? Email { get; set; }
+        }
+        public class GetListing
+        {
+            public int UserId { get; set; }
         }
 
     }
