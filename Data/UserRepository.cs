@@ -92,7 +92,7 @@ namespace DotNetApi.Data
             $@"<p style='font-size: 16px; color: #333;'>Click the link below to reset your password:</p>
                 <p><a href='http://localhost:4000/guest/verify?token={verificationToken}&email={email}'
                     style='display: inline-block; padding: 10px 20px; background-color: #007bff; color: #ffffff; 
-                    text-decoration: none; font-size: 16px; border-radius: 5px;' target='_blank'>Reset Password</a></p>
+                    text-decoration: none; font-size: 16px; border-radius: 5px;' target='_blank'>Verify your account</a></p>
                 <p>If you didn't request a password reset, you can ignore this email.</p>"));
 
                     return user;
@@ -113,7 +113,7 @@ namespace DotNetApi.Data
                 try
                 {
                     conn.Open();
-                    string query = "SELECT id, name, email, role, email_verified_at, remember_token  FROM users WHERE email = @email LIMIT 1;";
+                    string query = "SELECT id, name, email, role, email_verified_at, remember_token, profile_picture  FROM users WHERE email = @email LIMIT 1;";
 
                     using MySqlCommand cmd = new(query, conn);
                     cmd.Parameters.AddWithValue("@email", email);
@@ -129,6 +129,8 @@ namespace DotNetApi.Data
                             Role = reader.GetString("role"),
                             Token = reader.IsDBNull(reader.GetOrdinal("remember_token"))
                         ? null : reader.GetString("remember_token"),
+                            ProfilePicture = reader.IsDBNull(reader.GetOrdinal("profile_picture"))
+                        ? null : reader.GetString("profile_picture"),
                             EmailVerifiedAt = reader.IsDBNull(reader.GetOrdinal("email_verified_at"))
                         ? null
                         : reader.GetDateTime(reader.GetOrdinal("email_verified_at"))
@@ -137,7 +139,7 @@ namespace DotNetApi.Data
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("❌ Database Error: " + ex.Message);
+                    Console.WriteLine("❌ Database Error11: " + ex.Message);
                 }
             }
 

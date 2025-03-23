@@ -1,0 +1,25 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\css\\swagger-ui-dark.css",
+      "PackagePath": "staticwebassets\\css\\swagger-ui-dark.css"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.DotnetApi.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.DotnetApi.props",
+      "PackagePath": "build\\DotnetApi.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.DotnetApi.props",
+      "PackagePath": "buildMultiTargeting\\DotnetApi.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.DotnetApi.props",
+      "PackagePath": "buildTransitive\\DotnetApi.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

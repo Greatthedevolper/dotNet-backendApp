@@ -1,11 +1,39 @@
 {
   "Version": 1,
-  "Hash": "EG3mgwMeCfem+ug7IFC/dLRxTXLqw/6KWLJlhmCtQQ4=",
+  "Hash": "rOkzeEbZm9oMdMFIf76JHJKJAJ9nOhLLBDF5bFfBnMc=",
   "Source": "DotnetApi",
   "BasePath": "_content/DotnetApi",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "DotnetApi\\wwwroot",
+      "Source": "DotnetApi",
+      "ContentRoot": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\",
+      "BasePath": "_content/DotnetApi",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\css\\swagger-ui-dark.css",
+      "SourceId": "DotnetApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\",
+      "BasePath": "_content/DotnetApi",
+      "RelativePath": "css/swagger-ui-dark.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\swagger-ui-dark.css"
+    }
+  ]
 }

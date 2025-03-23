@@ -9,6 +9,7 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Identity.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DotNetApi.Controllers // ✅ Ensure correct namespace
 {
@@ -32,20 +33,20 @@ namespace DotNetApi.Controllers // ✅ Ensure correct namespace
         }
 
         [HttpPost("register")]
-        public IActionResult Register([FromBody] User newUser)
+        public IActionResult Register([FromBody] RegisterRequest model)
         {
-            if (string.IsNullOrEmpty(newUser.Name) || string.IsNullOrEmpty(newUser.Email) || string.IsNullOrEmpty(newUser.Password))
+            if (string.IsNullOrEmpty(model.Name) || string.IsNullOrEmpty(model.Email) || string.IsNullOrEmpty(model.Password))
             {
                 return BadRequest(new { status = false, message = "Name, email, and password are required." });
             }
 
-            var existingUser = _userRepository.GetUserByEmail(newUser.Email);
+            var existingUser = _userRepository.GetUserByEmail(model.Email);
             if (existingUser != null)
             {
                 return Conflict(new { status = false, message = "User already exists." });
             }
 
-            var createdUser = _userRepository.AddUser(newUser.Name, newUser.Email, newUser.Password);
+            var createdUser = _userRepository.AddUser(model.Name, model.Email, model.Password);
 
             if (createdUser == null)
             {
@@ -180,21 +181,51 @@ namespace DotNetApi.Controllers // ✅ Ensure correct namespace
             return Ok(new { status = true, message = "password reset successfully" });
         }
 
+        [Authorize]
+        [HttpGet("profile")]
+
+        public IActionResult Profile()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Get User ID
+            var userEmail = User.FindFirstValue(ClaimTypes.Email);       // Get Email
+            var userName = User.FindFirstValue(ClaimTypes.Name);         // Get Name
+            var userRole = User.FindFirstValue(ClaimTypes.Role);
+            const string ProfilePictureClaimType = "profile_picture";
+            var userPic = User.FindFirstValue(ProfilePictureClaimType);
+            if (userId == null)
+            {
+                return Unauthorized(new { status = false, message = "User not authenticated." });
+            }
+            return Ok(new
+            {
+                status = true,
+                user = new
+                {
+                    Id = userId,
+                    Name = userName,
+                    Email = userEmail,
+                    Role = userRole,
+                    ProfilePicture = userPic
+                }
+            });
+        }
 
 
 
-
-        private string GenerateJwtToken(User user)
+        static string GenerateJwtToken(User user)
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("95c6ce46bc28fe3cad21b6460c30b92a"));
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
+            const string ProfilePictureClaimType = "profile_picture";
             var claims = new[]
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.Email),
                 new Claim(JwtRegisteredClaimNames.Jti, System.Guid.NewGuid().ToString()),
-                new Claim("userId", user.Id.ToString()),
-                new Claim("role", user.Role ?? "User")
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Name, user.Name),
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Role, user.Role ?? "User"),
+                new Claim(ProfilePictureClaimType, user.ProfilePicture ?? "")
             };
 
             var token = new JwtSecurityToken(
@@ -206,6 +237,12 @@ namespace DotNetApi.Controllers // ✅ Ensure correct namespace
             );
 
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+        public class RegisterRequest
+        {
+            public string? Name { get; set; }
+            public string? Email { get; set; }
+            public string? Password { get; set; }
         }
         public class LoginRequest
         {

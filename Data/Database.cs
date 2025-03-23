@@ -6,7 +6,7 @@ namespace DotNetApi.Data
 {
     class Database
     {
-        private string connectionString = "server=localhost;database=live-wire-database;user=root;password='';";
+        private string connectionString = "server=localhost;database=listing_dotnet;user=root;password='';";
 
         public MySqlConnection GetConnection()
         {

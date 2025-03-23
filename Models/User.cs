@@ -9,5 +9,6 @@ public class User
     public string? Role { get; set; }
     public string? Token { get; set; }
     public string? VerificationToken { get; set; }
+    public string? ProfilePicture { get; set; }
     public DateTime? EmailVerifiedAt { get; set; }
 }
