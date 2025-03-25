@@ -181,36 +181,6 @@ namespace DotNetApi.Controllers // ✅ Ensure correct namespace
             return Ok(new { status = true, message = "password reset successfully" });
         }
 
-        [Authorize]
-        [HttpGet("profile")]
-
-        public IActionResult Profile()
-        {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Get User ID
-            var userEmail = User.FindFirstValue(ClaimTypes.Email);       // Get Email
-            var userName = User.FindFirstValue(ClaimTypes.Name);         // Get Name
-            var userRole = User.FindFirstValue(ClaimTypes.Role);
-            const string ProfilePictureClaimType = "profile_picture";
-            var userPic = User.FindFirstValue(ProfilePictureClaimType);
-            if (userId == null)
-            {
-                return Unauthorized(new { status = false, message = "User not authenticated." });
-            }
-            return Ok(new
-            {
-                status = true,
-                user = new
-                {
-                    Id = userId,
-                    Name = userName,
-                    Email = userEmail,
-                    Role = userRole,
-                    ProfilePicture = userPic
-                }
-            });
-        }
-
-
         // [Authorize]
         [HttpGet("dashboard")]
         public IActionResult Dashboard([FromQuery] int page = 1, [FromQuery] int pageSize = 10, [FromQuery] string search = "")

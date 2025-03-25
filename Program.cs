@@ -2,6 +2,7 @@ using DotNetApi.Services;
 using DotNetApi.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -40,21 +41,46 @@ builder.Services.AddAuthorization();
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
 // ✅ Register Dependencies
 builder.Services.AddScoped<UserRepository>();
+builder.Services.AddScoped<ProfileRepository>();
 builder.Services.AddScoped<EmailService>();
 
-// ✅ Swagger Configuration
-
+// ✅ Configure Swagger for JWT Authentication
 builder.Services.AddSwaggerGen(options =>
 {
-    options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+    options.SwaggerDoc("v1", new OpenApiInfo
     {
         Title = "Listing API",
         Version = "v1",
         Description = "This is the API for my Nuxt + .NET full-stack app about listings."
+    });
+
+    // 🔹 Enable JWT authentication in Swagger UI
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "Enter 'Bearer {your_token_here}' to authenticate.",
+    });
+
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] {}
+        }
     });
 });
 
@@ -67,6 +93,7 @@ app.UseAuthorization();
 // ✅ Enable CORS before other middleware
 app.UseCors("AllowNuxtFrontend");
 app.UseStaticFiles();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -75,9 +102,6 @@ if (app.Environment.IsDevelopment())
         options.InjectStylesheet("/css/swagger-ui-dark.css"); // ✅ Load dark mode CSS
     });
 }
-
-
-
 
 // ✅ Map Controllers (this enables API endpoints)
 app.MapControllers();
