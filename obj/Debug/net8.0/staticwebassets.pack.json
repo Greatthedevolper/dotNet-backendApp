@@ -5,48 +5,8 @@
       "PackagePath": "staticwebassets\\css\\swagger-ui-dark.css"
     },
     {
-      "Id": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\profile_pictures\\028fdd2d-6326-48f2-853d-ee01cdc6a301.png",
-      "PackagePath": "staticwebassets\\uploads\\profile_pictures\\028fdd2d-6326-48f2-853d-ee01cdc6a301.png"
-    },
-    {
-      "Id": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\profile_pictures\\2b5e0bfe-0d6b-4e1f-9ccb-fd31b1718a87.png",
-      "PackagePath": "staticwebassets\\uploads\\profile_pictures\\2b5e0bfe-0d6b-4e1f-9ccb-fd31b1718a87.png"
-    },
-    {
-      "Id": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\profile_pictures\\2daaf8e3-8668-4d14-8a9f-e9ada4c5c827.png",
-      "PackagePath": "staticwebassets\\uploads\\profile_pictures\\2daaf8e3-8668-4d14-8a9f-e9ada4c5c827.png"
-    },
-    {
-      "Id": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\profile_pictures\\3535fe34-abb5-4f67-9a0b-5196ff7398d1.jpg",
-      "PackagePath": "staticwebassets\\uploads\\profile_pictures\\3535fe34-abb5-4f67-9a0b-5196ff7398d1.jpg"
-    },
-    {
-      "Id": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\profile_pictures\\42726571-fac2-4514-9afe-eca586a348cd.png",
-      "PackagePath": "staticwebassets\\uploads\\profile_pictures\\42726571-fac2-4514-9afe-eca586a348cd.png"
-    },
-    {
-      "Id": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\profile_pictures\\77812d13-08ea-41fa-8855-75320a30e51e.png",
-      "PackagePath": "staticwebassets\\uploads\\profile_pictures\\77812d13-08ea-41fa-8855-75320a30e51e.png"
-    },
-    {
-      "Id": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\profile_pictures\\860fe49f-95be-49b3-8b8a-9af02abd4d42.png",
-      "PackagePath": "staticwebassets\\uploads\\profile_pictures\\860fe49f-95be-49b3-8b8a-9af02abd4d42.png"
-    },
-    {
-      "Id": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\profile_pictures\\9d5f30d5-19e8-4e95-a9b2-a6b4a7062bef.png",
-      "PackagePath": "staticwebassets\\uploads\\profile_pictures\\9d5f30d5-19e8-4e95-a9b2-a6b4a7062bef.png"
-    },
-    {
-      "Id": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\profile_pictures\\cabad294-c5ad-46d6-926c-07a826e9c9a0.jpg",
-      "PackagePath": "staticwebassets\\uploads\\profile_pictures\\cabad294-c5ad-46d6-926c-07a826e9c9a0.jpg"
-    },
-    {
-      "Id": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\profile_pictures\\d5ab9d93-83c8-4925-91d6-51149e263dfd.png",
-      "PackagePath": "staticwebassets\\uploads\\profile_pictures\\d5ab9d93-83c8-4925-91d6-51149e263dfd.png"
-    },
-    {
-      "Id": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\profile_pictures\\fed0e964-1eb3-4afa-8f42-341c2d18cd22.png",
-      "PackagePath": "staticwebassets\\uploads\\profile_pictures\\fed0e964-1eb3-4afa-8f42-341c2d18cd22.png"
+      "Id": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\profile_pictures\\31215f45-8b46-41bd-8015-ea65db535596.jpg",
+      "PackagePath": "staticwebassets\\uploads\\profile_pictures\\31215f45-8b46-41bd-8015-ea65db535596.jpg"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.DotnetApi.Microsoft.AspNetCore.StaticWebAssets.props",

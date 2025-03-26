@@ -17,10 +17,18 @@ namespace DotNetApi.Controllers
 {
     [ApiController]
     [Route("api/users")]
-    public class ProfileController(ProfileRepository profileRepository, EmailService emailService) : ControllerBase
+    public class ProfileController : ControllerBase
     {
-        private readonly ProfileRepository _profileRepository = profileRepository;
-        private readonly EmailService _emailService = emailService;
+        private readonly ProfileRepository _profileRepository;
+        private readonly UserRepository _userRepository;
+        private readonly EmailService _emailService;
+
+        public ProfileController(ProfileRepository profileRepository, UserRepository userRepository, EmailService emailService)
+        {
+            _profileRepository = profileRepository;
+            _userRepository = userRepository;
+            _emailService = emailService;
+        }
 
         [Authorize]
         [HttpGet("profile")]
@@ -100,6 +108,33 @@ namespace DotNetApi.Controllers
             }
         }
 
+        [HttpPost("profile/update/{userid}")]
+        public IActionResult UpdateProfile(int userid, [FromBody] ProfileUpdateRequest model)
+        {
+            if (userid == 0)
+            {
+                return Unauthorized(new { status = false, message = "You are not authorized! " });
+            }
+            if (string.IsNullOrEmpty(model.Email))
+            {
+                return BadRequest(new { status = false, message = "Email is Required" });
+            }
+            if (string.IsNullOrEmpty(model.Name))
+            {
+                return BadRequest(new { status = false, message = "name is Required" });
+            }
+            var user = _userRepository.GetUserByEmail(model.Email);
+            if (user != null)
+            {
+                return Unauthorized(new { status = false, message = "Email already exist" });
+            }
+            bool updated = _profileRepository.UpdateProfile(userid, model.Email, model.Name);
+            if (!updated)
+            {
+                return BadRequest(new { status = false, message = "New Password And Confirm Password are not matched." });
+            }
+            return Ok(new { status = true, message = "Your profile is updated" });
+        }
         static string GenerateJwtToken(User user)
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("95c6ce46bc28fe3cad21b6460c30b92a"));
@@ -134,4 +169,10 @@ namespace DotNetApi.Controllers
             public IFormFile? File { get; set; }
         }
     }
+    public class ProfileUpdateRequest
+    {
+        public string? Email { get; set; }
+        public string? Name { get; set; }
+    }
 }
+

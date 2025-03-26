@@ -16,34 +16,57 @@ namespace DotNetApi.Data
         {
             if (userId <= 0) // Validate user ID
             {
-                 return false;
+                return false;
             }
 
             try
             {
-                using (var conn = _database.GetConnection())
+                using var conn = _database.GetConnection();
+                conn.Open();
+                string query = "UPDATE users SET profile_picture = @filePath WHERE id = @id";
+
+                using var cmd = new MySqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@filePath", filePath);
+                cmd.Parameters.AddWithValue("@id", userId);
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                if (rowsAffected == 0)
                 {
-                    conn.Open();
-                    string query = "UPDATE users SET profile_picture = @filePath WHERE id = @id";
-
-                    using var cmd = new MySqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@filePath", filePath);
-                    cmd.Parameters.AddWithValue("@id", userId);
-                    int rowsAffected = cmd.ExecuteNonQuery();
-
-                    if (rowsAffected == 0)
-                    {
-                         return false;
-                    }
+                    return false;
                 }
 
-                 return true;
+                return true;
             }
             catch (Exception ex)
             {
                 Console.WriteLine("❌ Database Error: " + ex.Message);
-                 return false;
+                return false;
             }
+        }
+        public bool UpdateProfile(int Id, string Email, string Name)
+        {
+            try
+            {
+                using var conn = _database.GetConnection();
+                conn.Open();
+                string query = "UPDATE users SET name=@name,email=@email WHERE id=@id ";
+                using var cmd = new MySqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@id", Id);
+                cmd.Parameters.AddWithValue("@email", Email);
+                cmd.Parameters.AddWithValue("@name", Name);
+                int rowsAffected = cmd.ExecuteNonQuery();
+                if (rowsAffected == 0)
+                {
+                    return false;
+                }
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Database Error" + ex.Message);
+            }
+            return true;
         }
     }
 }

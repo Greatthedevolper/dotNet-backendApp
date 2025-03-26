@@ -17,7 +17,7 @@ namespace DotNetApi.Controllers // ✅ Ensure correct namespace
     [Route("api/users")]
     public class UserController : ControllerBase
     {
-        private readonly UserRepository _userRepository;
+        private readonly UserRepository _userRepository;    
         private readonly EmailService _emailService;
 
         public UserController(UserRepository userRepository, EmailService emailService)
