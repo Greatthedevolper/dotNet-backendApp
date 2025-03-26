@@ -145,6 +145,45 @@ namespace DotNetApi.Data
 
             return null; // Return null if no user is found
         }
+        public User? GetUserById(int Id)
+        {
+            using (MySqlConnection conn = _database.GetConnection())
+            {
+                try
+                {
+                    conn.Open();
+                    string query = "SELECT id, name, email, role, email_verified_at, remember_token, profile_picture  FROM users WHERE id = @id LIMIT 1;";
+
+                    using MySqlCommand cmd = new(query, conn);  
+                    cmd.Parameters.AddWithValue("@id", Id);
+
+                    using MySqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.Read()) // If user is found
+                    {
+                        return new User
+                        {
+                            Id = reader.GetInt32("id"),
+                            Name = reader.GetString("name"),
+                            Email = reader.GetString("email"),
+                            Role = reader.GetString("role"),
+                            Token = reader.IsDBNull(reader.GetOrdinal("remember_token"))
+                        ? null : reader.GetString("remember_token"),
+                            ProfilePicture = reader.IsDBNull(reader.GetOrdinal("profile_picture"))
+                        ? null : reader.GetString("profile_picture"),
+                            EmailVerifiedAt = reader.IsDBNull(reader.GetOrdinal("email_verified_at"))
+                        ? null
+                        : reader.GetDateTime(reader.GetOrdinal("email_verified_at"))
+                        };
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("❌ Database Error11: " + ex.Message);
+                }
+            }
+
+            return null; // Return null if no user is found
+        }
         public bool VerifyPassword(string email, string enteredPassword)
         {
             using MySqlConnection conn = _database.GetConnection();

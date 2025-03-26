@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "fz0seZcW39gN6ZcQ04iNO3y3RAom7Gdm+LiG0BIMna8=",
+  "Hash": "SEDekji80QqbjzqaBjmtTLxKNady/XhpZx7uWTKoS7M=",
   "Source": "DotnetApi",
   "BasePath": "_content/DotnetApi",
   "Mode": "Default",
@@ -53,6 +53,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\profile_pictures\\31215f45-8b46-41bd-8015-ea65db535596.jpg"
+    },
+    {
+      "Identity": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\profile_pictures\\default-avatar.jpeg",
+      "SourceId": "DotnetApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\",
+      "BasePath": "_content/DotnetApi",
+      "RelativePath": "uploads/profile_pictures/default-avatar.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\profile_pictures\\default-avatar.jpeg"
     }
   ]
 }

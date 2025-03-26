@@ -34,28 +34,34 @@ namespace DotNetApi.Controllers
         [HttpGet("profile")]
         public IActionResult Profile()
         {
-            var userId = User.FindFirstValue("user_id");
-            var userEmail = User.FindFirstValue(ClaimTypes.Email);       // Get Email
-            var userName = User.FindFirstValue(ClaimTypes.Name);         // Get Name
-            var userRole = User.FindFirstValue(ClaimTypes.Role);
-            const string ProfilePictureClaimType = "profile_picture";
-            var userPic = User.FindFirstValue(ProfilePictureClaimType);
-
-            if (userId == null)
+            var userIdClaim = User.FindFirstValue("user_id");
+            if (string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out int userId))
             {
                 return Unauthorized(new { status = false, message = "User not authenticated." });
             }
+            var currentUser = _userRepository.GetUserById(userId);
+
+            if (currentUser == null)
+            {
+                return NotFound(new { status = false, message = "User not found." });
+            }
+            string baseUrl = $"{Request.Scheme}://{Request.Host}";
+            string profilePicUrl = string.IsNullOrEmpty(currentUser.ProfilePicture)
+                ? $"{baseUrl}/uploads/profile_pictures/default-avatar.jpeg"
+                : $"{baseUrl}{currentUser.ProfilePicture}";
 
             return Ok(new
             {
                 status = true,
                 user = new
                 {
-                    Id = userId,
-                    Name = userName,
-                    Email = userEmail,
-                    Role = userRole,
-                    ProfilePicture = $"http://localhost:5067{userPic}"
+                    Id = currentUser.Id,
+                    Name = currentUser.Name,
+                    Email = currentUser.Email,
+                    Role = currentUser.Role,
+                    Token = currentUser.Token,
+                    EmailVerifiedAt = currentUser.EmailVerifiedAt,
+                    ProfilePicture = profilePicUrl
                 }
             });
         }
@@ -111,30 +117,49 @@ namespace DotNetApi.Controllers
         [HttpPost("profile/update/{userid}")]
         public IActionResult UpdateProfile(int userid, [FromBody] ProfileUpdateRequest model)
         {
-            if (userid == 0)
+            if (userid <= 0)
             {
-                return Unauthorized(new { status = false, message = "You are not authorized! " });
+                return Unauthorized(new { status = false, message = "Invalid user ID. Authentication required." });
             }
-            if (string.IsNullOrEmpty(model.Email))
+
+            if (model == null)
             {
-                return BadRequest(new { status = false, message = "Email is Required" });
+                return BadRequest(new { status = false, message = "Invalid request. No data provided." });
             }
-            if (string.IsNullOrEmpty(model.Name))
+
+            var currentUser = _userRepository.GetUserById(userid);
+            if (currentUser == null)
             {
-                return BadRequest(new { status = false, message = "name is Required" });
+                return NotFound(new { status = false, message = "User not found." });
             }
-            var user = _userRepository.GetUserByEmail(model.Email);
-            if (user != null)
+
+            if (!string.IsNullOrWhiteSpace(model.Email) && model.Email != currentUser.Email)
             {
-                return Unauthorized(new { status = false, message = "Email already exist" });
+                var existingUser = _userRepository.GetUserByEmail(model.Email);
+                if (existingUser != null && existingUser.Id != userid)
+                {
+                    return Conflict(new { status = false, message = "This email is already in use by another user." });
+                }
             }
-            bool updated = _profileRepository.UpdateProfile(userid, model.Email, model.Name);
-            if (!updated)
+
+            string newName = string.IsNullOrWhiteSpace(model.Name) ? currentUser.Name : model.Name;
+            string newEmail = string.IsNullOrWhiteSpace(model.Email) ? currentUser.Email : model.Email;
+
+            if (newName == currentUser.Name && newEmail == currentUser.Email)
             {
-                return BadRequest(new { status = false, message = "New Password And Confirm Password are not matched." });
+                return BadRequest(new { status = false, message = "No changes detected." });
             }
-            return Ok(new { status = true, message = "Your profile is updated" });
+
+            bool isUpdated = _profileRepository.UpdateProfile(userid, newEmail, newName);
+            if (!isUpdated)
+            {
+                return StatusCode(500, new { status = false, message = "Failed to update profile. Please try again later." });
+            }
+
+            return Ok(new { status = true, message = "Your profile has been updated successfully." });
         }
+
+
         static string GenerateJwtToken(User user)
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("95c6ce46bc28fe3cad21b6460c30b92a"));
