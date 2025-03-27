@@ -3,16 +3,20 @@ using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 using DotNetApi.Models;
 using BCrypt.Net;
+using MySql.Data.MySqlClient.Authentication;
+using Org.BouncyCastle.Asn1.Ocsp;
 
 namespace DotNetApi.Data
 {
     public class ListingRepository
     {
         private readonly Database _database;
+        private readonly UserRepository _userRepository;
 
-        public ListingRepository()
+        public ListingRepository(UserRepository userRepository)
         {
             _database = new Database();
+            _userRepository = userRepository;
         }
 
         public PaginatedResponse GetAllListings(int page, int pageSize, string search)
@@ -94,6 +98,44 @@ namespace DotNetApi.Data
                 HasPrevious = page > 1,
                 HasNext = page < totalPages
             };
+        }
+        public (Listing? listing, User? currentUser) GetSingleListing(int id, HttpRequest request)
+        {
+            Listing? listing = null;
+            using (MySqlConnection conn = _database.GetConnection())
+            {
+                conn.Open();
+                string query = "SELECT * FROM listings WHERE id=@id LIMIT 1";
+                using MySqlCommand cmd = new(query, conn);
+                cmd.Parameters.AddWithValue("@id", id);
+                using MySqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    string baseUrl = $"{request.Scheme}://{request.Host}";
+
+                    // ✅ Construct profile picture URL properly
+                    string profilePicUrl = reader.IsDBNull(reader.GetOrdinal("image"))
+                        ? $"{baseUrl}/uploads/profile_pictures/default-avatar.jpeg"
+                        : $"{baseUrl}/{reader.GetString("image")}";
+                    listing = new Listing
+                    {
+                        Id = reader.GetInt32("id"),
+                        UserId = reader.GetInt32("user_id"),
+                        Title = reader.GetString("title"),
+                        Desc = reader.GetString("desc"),
+                        Tags = reader.GetString("tags"),
+                        Email = reader.GetString("email"),
+                        Link = reader.GetString("link"),
+                        Image = profilePicUrl,
+                        Approved = reader.GetInt32("approved"),
+                        CreatedAt = reader.GetDateTime("created_at"),
+                        UpdatedAt = reader.GetDateTime("updated_at")
+                    };
+                }
+            }
+            User? currentUser = listing != null ? _userRepository.GetUserById(listing.UserId) : null;
+
+            return (listing, currentUser);
         }
 
 

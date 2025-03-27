@@ -43,6 +43,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
 // ✅ Register Dependencies
+builder.Services.AddScoped<ListingRepository>();
 builder.Services.AddScoped<UserRepository>();
 builder.Services.AddScoped<ProfileRepository>();
 builder.Services.AddScoped<EmailService>();
