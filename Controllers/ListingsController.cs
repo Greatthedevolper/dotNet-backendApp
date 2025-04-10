@@ -54,7 +54,6 @@ namespace DotNetApi.Controllers
                 return BadRequest(new { status = false, message = "Invalid listing ID." });
             }
 
-            // ✅ Fix tuple handling
             var (listing, currentUser) = _listingRepository.GetSingleListing(id, Request);
 
             if (listing == null)
@@ -72,6 +71,30 @@ namespace DotNetApi.Controllers
                     user = currentUser
                 }
             });
+        }
+
+        [HttpPost]
+        public IActionResult SaveListing([FromForm] Listing listing, [FromForm] IFormFile? imageFile)
+        {
+            if (listing == null)
+
+                return BadRequest(new { status = false, message = "Invalid data." });
+
+            bool isSaved = _listingRepository.SaveListing(listing, imageFile);
+
+            if (isSaved)
+            {
+                return Ok(new
+                {
+                    status = true,
+                    message = listing.Id == 0 ? "Listing created successfully." : "Listing updated successfully."
+                });
+            }
+            else
+            {
+                return StatusCode(500, new { status = false, message = "An error occurred while saving the listing." });
+            }
+
         }
     }
 }

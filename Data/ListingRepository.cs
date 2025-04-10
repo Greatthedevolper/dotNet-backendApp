@@ -115,7 +115,7 @@ namespace DotNetApi.Data
 
                     // ✅ Construct profile picture URL properly
                     string profilePicUrl = reader.IsDBNull(reader.GetOrdinal("image"))
-                        ? $"{baseUrl}/uploads/profile_pictures/default-avatar.jpeg"
+                        ? $"{baseUrl}/uploads/listing_pictures/default-avatar.jpeg"
                         : $"{baseUrl}/{reader.GetString("image")}";
                     listing = new Listing
                     {
@@ -138,7 +138,67 @@ namespace DotNetApi.Data
             return (listing, currentUser);
         }
 
+        public bool SaveListing(Listing listing, IFormFile? imageFile = null)
+        {
+            using MySqlConnection conn = _database.GetConnection();
+            conn.Open();
 
+            string? imagePath = null;
+            // Save the image file if provided
+            if (imageFile != null && imageFile.Length > 0)
+            {
+                string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "listing_pictures");
+                Directory.CreateDirectory(uploadsFolder);
+                string uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(imageFile.FileName);
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    imageFile.CopyTo(stream);
+                }
+
+                imagePath = $"uploads/listing_pictures/{uniqueFileName}";
+            }
+
+            if (listing.Id == 0)
+            {
+                // CREATE listing
+                string insertQuery = @"
+                INSERT INTO listings (user_id, title, `desc`, tags, email, link, image, approved, created_at, updated_at)
+                VALUES (@userId, @title, @desc, @tags, @email, @link, @image, @approved, NOW(), NOW());";
+
+                using MySqlCommand cmd = new(insertQuery, conn);
+                cmd.Parameters.AddWithValue("@userId", listing.UserId);
+                cmd.Parameters.AddWithValue("@title", listing.Title);
+                cmd.Parameters.AddWithValue("@desc", listing.Desc);
+                cmd.Parameters.AddWithValue("@tags", listing.Tags);
+                cmd.Parameters.AddWithValue("@email", listing.Email);
+                cmd.Parameters.AddWithValue("@link", listing.Link);
+                cmd.Parameters.AddWithValue("@image", imagePath ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@approved", listing.Approved);
+
+                return cmd.ExecuteNonQuery() > 0;
+            }
+            else
+            {
+                // UPDATE listing
+                string updateQuery = @"
+                UPDATE listings
+                SET title = @title, `desc` = @desc, tags = @tags, email = @email, link = @link, image = @image, updated_at = NOW()
+                WHERE id = @id;";
+
+                using MySqlCommand cmd = new(updateQuery, conn);
+                cmd.Parameters.AddWithValue("@id", listing.Id);
+                cmd.Parameters.AddWithValue("@title", listing.Title);
+                cmd.Parameters.AddWithValue("@desc", listing.Desc);
+                cmd.Parameters.AddWithValue("@tags", listing.Tags);
+                cmd.Parameters.AddWithValue("@email", listing.Email);
+                cmd.Parameters.AddWithValue("@link", listing.Link);
+                cmd.Parameters.AddWithValue("@image", listing.Image ?? null);
+
+                return cmd.ExecuteNonQuery() > 0;
+            }
+        }
 
     }
 }
