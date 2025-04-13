@@ -135,7 +135,7 @@ namespace DotNetApi.Controllers
 
             if (!string.IsNullOrWhiteSpace(model.Email) && model.Email != currentUser.Email)
             {
-                var existingUser = _userRepository.GetUserByEmail(model.Email);
+                var existingUser = _userRepository.GetUserByEmail(model.Email,HttpContext.Request);
                 if (existingUser != null && existingUser.Id != userid)
                 {
                     return Conflict(new { status = false, message = "This email is already in use by another user." });

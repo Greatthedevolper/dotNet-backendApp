@@ -40,7 +40,7 @@ namespace DotNetApi.Controllers // ✅ Ensure correct namespace
                 return BadRequest(new { status = false, message = "Name, email, and password are required." });
             }
 
-            var existingUser = _userRepository.GetUserByEmail(model.Email);
+            var existingUser = _userRepository.GetUserByEmail(model.Email,HttpContext.Request);
             if (existingUser != null)
             {
                 return Conflict(new { status = false, message = "User already exists." });
@@ -65,7 +65,7 @@ namespace DotNetApi.Controllers // ✅ Ensure correct namespace
             }
 
             // Check if user exists
-            var user = _userRepository.GetUserByEmail(model.Email);
+            var user = _userRepository.GetUserByEmail(model.Email,HttpContext.Request);
             if (user == null)
             {
                 return Unauthorized(new { status = false, message = "Email doesn't exist" });
@@ -93,7 +93,7 @@ namespace DotNetApi.Controllers // ✅ Ensure correct namespace
                 return BadRequest(new { status = false, message = "Email and Token are required." });
             }
 
-            var user = _userRepository.GetUserByEmail(model.Email);
+            var user = _userRepository.GetUserByEmail(model.Email,HttpContext.Request);
             if (user == null)
             {
                 return Unauthorized(new { status = false, message = "Email doesn't exist." });
@@ -119,7 +119,7 @@ namespace DotNetApi.Controllers // ✅ Ensure correct namespace
             {
                 return BadRequest(new { status = false, message = "Email is required." });
             }
-            var user = _userRepository.GetUserByEmail(model.Email);
+            var user = _userRepository.GetUserByEmail(model.Email,HttpContext.Request);
             if (user == null)
             {
                 return Unauthorized(new { status = false, message = "Email doesn't exist." });
@@ -143,7 +143,7 @@ namespace DotNetApi.Controllers // ✅ Ensure correct namespace
             {
                 return BadRequest(new { status = false, message = "Email is required." });
             }
-            var user = _userRepository.GetUserByEmail(model.Email);
+            var user = _userRepository.GetUserByEmail(model.Email,HttpContext.Request);
             if (user == null)
             {
                 return Unauthorized(new { status = false, message = "Email doesn't exist." });
@@ -199,7 +199,7 @@ namespace DotNetApi.Controllers // ✅ Ensure correct namespace
                 return Unauthorized(new { status = false, message = "Invalid user ID format." });
             }
 
-            var user = _userRepository.GetUserByEmail(userEmail);
+            var user = _userRepository.GetUserByEmail(userEmail,HttpContext.Request);
             if (user == null)
             {
                 return Unauthorized(new { status = false, message = "Email is not registered." });
@@ -214,8 +214,7 @@ namespace DotNetApi.Controllers // ✅ Ensure correct namespace
             {
                 return Unauthorized(new { status = false, message = "You are not authorized to access this resource." });
             }
-
-            var result = _userRepository.GetUserListings(page, pageSize, search, userId);
+            var result = _userRepository.GetUserListings(page, pageSize, search, userId, HttpContext.Request);
             if (result == null || result.Data == null || ((dynamic)result.Data).listings.Count == 0)
             {
                 return NotFound(new

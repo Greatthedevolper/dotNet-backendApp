@@ -106,7 +106,7 @@ namespace DotNetApi.Data
             return null;
         }
 
-        public User? GetUserByEmail(string email)
+        public User? GetUserByEmail(string email,HttpRequest request)
         {
             using (MySqlConnection conn = _database.GetConnection())
             {
@@ -121,6 +121,13 @@ namespace DotNetApi.Data
                     using MySqlDataReader reader = cmd.ExecuteReader();
                     if (reader.Read()) // If user is found
                     {
+                        string baseUrl = $"{request.Scheme}://{request.Host}";
+
+                            string? imagePath = reader.IsDBNull(reader.GetOrdinal("profile_picture")) ? null : reader.GetString("profile_picture");
+
+                            string profilePicUrl = string.IsNullOrWhiteSpace(imagePath)
+                                ? $"{baseUrl}/uploads/profile_pictures/default-avatar.jpeg"
+                                : $"{baseUrl}/{imagePath}";
                         return new User
                         {
                             Id = reader.GetInt32("id"),
@@ -129,8 +136,7 @@ namespace DotNetApi.Data
                             Role = reader.GetString("role"),
                             Token = reader.IsDBNull(reader.GetOrdinal("remember_token"))
                         ? null : reader.GetString("remember_token"),
-                            ProfilePicture = reader.IsDBNull(reader.GetOrdinal("profile_picture"))
-                        ? null : reader.GetString("profile_picture"),
+                            ProfilePicture = profilePicUrl,
                             EmailVerifiedAt = reader.IsDBNull(reader.GetOrdinal("email_verified_at"))
                         ? null
                         : reader.GetDateTime(reader.GetOrdinal("email_verified_at"))
@@ -154,7 +160,7 @@ namespace DotNetApi.Data
                     conn.Open();
                     string query = "SELECT id, name, email, role, email_verified_at, remember_token, profile_picture  FROM users WHERE id = @id LIMIT 1;";
 
-                    using MySqlCommand cmd = new(query, conn);  
+                    using MySqlCommand cmd = new(query, conn);
                     cmd.Parameters.AddWithValue("@id", Id);
 
                     using MySqlDataReader reader = cmd.ExecuteReader();
@@ -313,7 +319,7 @@ namespace DotNetApi.Data
             }
             return true;
         }
-        public PaginatedResponse GetUserListings(int page, int pageSize, string search, int userId)
+        public PaginatedResponse GetUserListings(int page, int pageSize, string search, int userId, HttpRequest request)
         {
             List<Listing> listings = new List<Listing>();
             int totalCount = 0;
@@ -358,6 +364,14 @@ namespace DotNetApi.Data
                         using MySqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
                         {
+                            string baseUrl = $"{request.Scheme}://{request.Host}";
+
+                            string? imagePath = reader.IsDBNull(reader.GetOrdinal("image")) ? null : reader.GetString("image");
+
+                            string profilePicUrl = string.IsNullOrWhiteSpace(imagePath)
+                                ? $"{baseUrl}/uploads/listing_pictures/default-avatar.jpeg"
+                                : $"{baseUrl}/{imagePath}";
+
                             listings.Add(new Listing
                             {
                                 Id = reader.GetInt32("id"),
@@ -367,7 +381,7 @@ namespace DotNetApi.Data
                                 Tags = reader.GetString("tags"),
                                 Email = reader.GetString("email"),
                                 Link = reader.GetString("link"),
-                                Image = reader.IsDBNull(reader.GetOrdinal("image")) ? null : reader.GetString("image"),
+                                Image = profilePicUrl,
                                 Approved = reader.GetInt32("approved"),
                                 CreatedAt = reader.GetDateTime("created_at"),
                                 UpdatedAt = reader.GetDateTime("updated_at")

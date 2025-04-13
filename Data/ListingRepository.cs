@@ -19,7 +19,7 @@ namespace DotNetApi.Data
             _userRepository = userRepository;
         }
 
-        public PaginatedResponse GetAllListings(int page, int pageSize, string search)
+        public PaginatedResponse GetAllListings(int page, int pageSize, string search, HttpRequest request)
         {
             List<Listing> listings = [];
             int totalCount = 0;
@@ -57,6 +57,13 @@ namespace DotNetApi.Data
                         using MySqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
                         {
+                            string baseUrl = $"{request.Scheme}://{request.Host}";
+
+                            string? imagePath = reader.IsDBNull(reader.GetOrdinal("image")) ? null : reader.GetString("image");
+
+                            string profilePicUrl = string.IsNullOrWhiteSpace(imagePath)
+                                ? $"{baseUrl}/uploads/listing_pictures/default-avatar.jpeg"
+                                : $"{baseUrl}/{imagePath}";
                             listings.Add(new Listing
                             {
                                 Id = reader.GetInt32("id"),
@@ -66,7 +73,7 @@ namespace DotNetApi.Data
                                 Tags = reader.GetString("tags"),
                                 Email = reader.GetString("email"),
                                 Link = reader.GetString("link"),
-                                Image = reader.IsDBNull(reader.GetOrdinal("image")) ? null : reader.GetString("image"),
+                                Image = profilePicUrl,
                                 Approved = reader.GetInt32("approved"),
                                 CreatedAt = reader.GetDateTime("created_at"),
                                 UpdatedAt = reader.GetDateTime("updated_at")
@@ -113,10 +120,11 @@ namespace DotNetApi.Data
                 {
                     string baseUrl = $"{request.Scheme}://{request.Host}";
 
-                    // ✅ Construct profile picture URL properly
-                    string profilePicUrl = reader.IsDBNull(reader.GetOrdinal("image"))
+                    string? imagePath = reader.IsDBNull(reader.GetOrdinal("image")) ? null : reader.GetString("image");
+
+                    string profilePicUrl = string.IsNullOrWhiteSpace(imagePath)
                         ? $"{baseUrl}/uploads/listing_pictures/default-avatar.jpeg"
-                        : $"{baseUrl}/{reader.GetString("image")}";
+                        : $"{baseUrl}/{imagePath}";
                     listing = new Listing
                     {
                         Id = reader.GetInt32("id"),
@@ -181,6 +189,26 @@ namespace DotNetApi.Data
             }
             else
             {
+                string? existingImagePath = null;
+                string selectQuery = "SELECT image FROM listings WHERE id = @id LIMIT 1;";
+                using (MySqlCommand selectCmd = new(selectQuery, conn))
+                {
+                    selectCmd.Parameters.AddWithValue("@id", listing.Id);
+                    using var reader = selectCmd.ExecuteReader();
+                    if (reader.Read() && !reader.IsDBNull(reader.GetOrdinal("image")))
+                    {
+                        existingImagePath = reader.GetString("image");
+                    }
+                }
+                if (!string.IsNullOrEmpty(existingImagePath) && imagePath != null && existingImagePath != imagePath)
+                {
+                    string fullOldImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", existingImagePath.Replace("/", Path.DirectorySeparatorChar.ToString()));
+                    if (File.Exists(fullOldImagePath))
+                    {
+                        File.Delete(fullOldImagePath);
+                    }
+                }
+
                 // UPDATE listing
                 string updateQuery = @"
                 UPDATE listings
@@ -194,10 +222,32 @@ namespace DotNetApi.Data
                 cmd.Parameters.AddWithValue("@tags", listing.Tags);
                 cmd.Parameters.AddWithValue("@email", listing.Email);
                 cmd.Parameters.AddWithValue("@link", listing.Link);
-                cmd.Parameters.AddWithValue("@image", listing.Image ?? null);
+                cmd.Parameters.AddWithValue("@image", imagePath ?? (object)DBNull.Value);
 
                 return cmd.ExecuteNonQuery() > 0;
             }
+        }
+
+        public bool ApprovedListing(int id, int approval)
+        {
+            using MySqlConnection conn = _database.GetConnection();
+            conn.Open();
+            string approvalQuery = "UPDATE listings SET approved = @approved WHERE id = @id;";
+            using MySqlCommand cmd = new(approvalQuery, conn);
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.Parameters.AddWithValue("@approved", approval);
+            return cmd.ExecuteNonQuery() > 0;
+
+        }
+        public bool deleteListing(int id)
+        {
+            using MySqlConnection conn = _database.GetConnection();
+            conn.Open();
+            string approvalQuery = "DELETE FROM listings WHERE id = @id;";
+            using MySqlCommand cmd = new(approvalQuery, conn);
+            cmd.Parameters.AddWithValue("@id", id);
+            return cmd.ExecuteNonQuery() > 0;
+
         }
 
     }
