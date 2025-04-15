@@ -43,6 +43,27 @@ namespace DotNetApi.Data
                 return false;
             }
         }
+        public string? GetExistingProfileImagePath(int userId)
+        {
+            try
+            {
+                using var conn = _database.GetConnection();
+                conn.Open();
+
+                string query = "SELECT profile_picture FROM users WHERE id = @id LIMIT 1";
+                using var cmd = new MySqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@id", userId);
+
+                var result = cmd.ExecuteScalar();
+                return result != DBNull.Value ? Convert.ToString(result) : null;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("❌ Error retrieving image path: " + ex.Message);
+                return null;
+            }
+        }
+
         public bool UpdateProfile(int Id, string Email, string Name)
         {
             try

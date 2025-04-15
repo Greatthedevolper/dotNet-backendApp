@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\css\\swagger-ui-dark.css"
     },
     {
+      "Id": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\1498287e-a967-4088-8c15-b3ef6039d3a2.png",
+      "PackagePath": "staticwebassets\\uploads\\listing_pictures\\1498287e-a967-4088-8c15-b3ef6039d3a2.png"
+    },
+    {
       "Id": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\37b04838-305b-4cce-82e8-008f176f0b10.png",
       "PackagePath": "staticwebassets\\uploads\\listing_pictures\\37b04838-305b-4cce-82e8-008f176f0b10.png"
     },
@@ -13,12 +17,8 @@
       "PackagePath": "staticwebassets\\uploads\\listing_pictures\\default-avatar.jpeg"
     },
     {
-      "Id": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\profile_pictures\\0c6c4620-777a-4e88-a569-8a32cd2c4bef.jpg",
-      "PackagePath": "staticwebassets\\uploads\\profile_pictures\\0c6c4620-777a-4e88-a569-8a32cd2c4bef.jpg"
-    },
-    {
-      "Id": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\profile_pictures\\31215f45-8b46-41bd-8015-ea65db535596.jpg",
-      "PackagePath": "staticwebassets\\uploads\\profile_pictures\\31215f45-8b46-41bd-8015-ea65db535596.jpg"
+      "Id": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\profile_pictures\\22c53374-f636-434d-aad3-79fadf38a6a3.png",
+      "PackagePath": "staticwebassets\\uploads\\profile_pictures\\22c53374-f636-434d-aad3-79fadf38a6a3.png"
     },
     {
       "Id": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\profile_pictures\\default-avatar.jpeg",

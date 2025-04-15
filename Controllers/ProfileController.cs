@@ -46,9 +46,20 @@ namespace DotNetApi.Controllers
                 return NotFound(new { status = false, message = "User not found." });
             }
             string baseUrl = $"{Request.Scheme}://{Request.Host}";
-            string profilePicUrl = string.IsNullOrEmpty(currentUser.ProfilePicture)
-                ? $"{baseUrl}/uploads/profile_pictures/default-avatar.jpeg"
-                : $"{baseUrl}{currentUser.ProfilePicture}";
+            string profilePicturePath = currentUser.ProfilePicture ?? "";
+            string physicalPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", profilePicturePath.TrimStart('/').Replace("/", Path.DirectorySeparatorChar.ToString()));
+            string profilePicUrl;
+            if (!string.IsNullOrEmpty(profilePicturePath) && System.IO.File.Exists(physicalPath))
+            {
+                profilePicUrl = $"{baseUrl}{profilePicturePath}";
+            }
+            else
+            {
+                profilePicUrl = $"{baseUrl}/uploads/profile_pictures/default-avatar.jpeg";
+            }
+            // string profilePicUrl = string.IsNullOrEmpty(currentUser.ProfilePicture)
+            //     ? $"{baseUrl}/uploads/profile_pictures/default-avatar.jpeg"
+            //     : $"{baseUrl}{currentUser.ProfilePicture}";
 
             return Ok(new
             {
@@ -70,9 +81,8 @@ namespace DotNetApi.Controllers
         [HttpPost("profile/update-picture")]
         public async Task<IActionResult> UpdateProfilePicture([FromForm] ProfilePictureRequest model)
         {
-            var userId = User.FindFirstValue("user_id");
-            // var userId = 8.ToString();
-            if (userId == null)
+            var userIdString = User.FindFirstValue("user_id");
+            if (!int.TryParse(userIdString, out var userId))
             {
                 return Unauthorized(new { status = false, message = "User not authenticated." });
             }
@@ -82,34 +92,49 @@ namespace DotNetApi.Controllers
                 return BadRequest(new { status = false, message = "File not provided." });
             }
 
-            var allowedExtensions = new List<string> { ".jpg", ".jpeg", ".png" };
+            var allowedExtensions = new List<string> { ".jpg", ".jpeg", ".png", ".gif", ".webp" };
             var fileExtension = Path.GetExtension(model.File.FileName).ToLower();
             if (!allowedExtensions.Contains(fileExtension))
             {
-                return BadRequest(new { status = false, message = "Invalid file type. Only .jpg, .jpeg, .png allowed." });
+                return BadRequest(new { status = false, message = "Invalid file type. Only .jpg, .jpeg, .png,.gif,.webp allowed." });
             }
-
+            var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "profile_pictures");
+            Directory.CreateDirectory(uploadsFolder);
             var uniqueFileName = $"{Guid.NewGuid()}{fileExtension}";
-            var uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads/profile_pictures");
-            if (!Directory.Exists(uploadPath))
-            {
-                Directory.CreateDirectory(uploadPath);
-            }
 
-            var filePath = Path.Combine(uploadPath, uniqueFileName);
-            await using var stream = new FileStream(filePath, FileMode.Create);
-            await model.File.CopyToAsync(stream);
+
+            var newFilePath = Path.Combine(uploadsFolder, uniqueFileName);
+            await using (var stream = new FileStream(newFilePath, FileMode.Create))
+            {
+                await model.File.CopyToAsync(stream);
+            }
 
             // Save file path in the database
             string dbFilePath = $"/uploads/profile_pictures/{uniqueFileName}";
-            var result = _profileRepository.UpdateProfileImage(int.Parse(userId), dbFilePath);
+
+
+
+            var oldPath = _profileRepository.GetExistingProfileImagePath(userId);
+            var result = _profileRepository.UpdateProfileImage(userId, dbFilePath);
 
             if (result)
             {
+                if (!string.IsNullOrWhiteSpace(oldPath) && !oldPath.Contains("default-avatar.jpg"))
+                {
+                    var fullOldPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", oldPath.TrimStart('/').Replace("/", Path.DirectorySeparatorChar.ToString()));
+                    if (System.IO.File.Exists(fullOldPath))
+                    {
+                        System.IO.File.Delete(fullOldPath);
+                    }
+                }
                 return Ok(new { status = true, message = "Profile picture updated successfully." });
             }
             else
             {
+                if (System.IO.File.Exists(newFilePath))
+                {
+                    System.IO.File.Delete(newFilePath);
+                }
                 return BadRequest(new { status = false, message = "Failed to update profile picture." });
             }
         }
@@ -135,7 +160,7 @@ namespace DotNetApi.Controllers
 
             if (!string.IsNullOrWhiteSpace(model.Email) && model.Email != currentUser.Email)
             {
-                var existingUser = _userRepository.GetUserByEmail(model.Email,HttpContext.Request);
+                var existingUser = _userRepository.GetUserByEmail(model.Email, HttpContext.Request);
                 if (existingUser != null && existingUser.Id != userid)
                 {
                     return Conflict(new { status = false, message = "This email is already in use by another user." });
