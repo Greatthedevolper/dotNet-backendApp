@@ -106,7 +106,7 @@ namespace DotNetApi.Data
             return null;
         }
 
-        public User? GetUserByEmail(string email,HttpRequest request)
+        public User? GetUserByEmail(string email, HttpRequest request)
         {
             using (MySqlConnection conn = _database.GetConnection())
             {
@@ -122,12 +122,25 @@ namespace DotNetApi.Data
                     if (reader.Read()) // If user is found
                     {
                         string baseUrl = $"{request.Scheme}://{request.Host}";
+                        string profilePicturePath = reader.IsDBNull(reader.GetOrdinal("profile_picture")) ? "" : reader.GetString("profile_picture");
+                        string physicalPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", profilePicturePath.TrimStart('/').Replace("/", Path.DirectorySeparatorChar.ToString()));
+                        string profilePicUrl;
+                        if (!string.IsNullOrEmpty(profilePicturePath) && System.IO.File.Exists(physicalPath))
+                        {
+                            profilePicUrl = $"{baseUrl}{profilePicturePath}";
+                        }
+                        else
+                        {
 
-                            string? imagePath = reader.IsDBNull(reader.GetOrdinal("profile_picture")) ? null : reader.GetString("profile_picture");
+                            profilePicUrl = $"{baseUrl}/uploads/profile_pictures/default-avatar.jpeg";
+                        }
+                        
 
-                            string profilePicUrl = string.IsNullOrWhiteSpace(imagePath)
-                                ? $"{baseUrl}/uploads/profile_pictures/default-avatar.jpeg"
-                                : $"{baseUrl}/{imagePath}";
+                        // string? imagePath = reader.IsDBNull(reader.GetOrdinal("profile_picture")) ? null : reader.GetString("profile_picture");
+
+                        // string profilePicUrl = string.IsNullOrWhiteSpace(imagePath)
+                        //     ? $"{baseUrl}/uploads/profile_pictures/default-avatar.jpeg"
+                        //     : $"{baseUrl}/{imagePath}";
                         return new User
                         {
                             Id = reader.GetInt32("id"),
