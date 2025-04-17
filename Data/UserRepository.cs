@@ -134,7 +134,7 @@ namespace DotNetApi.Data
 
                             profilePicUrl = $"{baseUrl}/uploads/profile_pictures/default-avatar.jpeg";
                         }
-                        
+
 
                         // string? imagePath = reader.IsDBNull(reader.GetOrdinal("profile_picture")) ? null : reader.GetString("profile_picture");
 
@@ -377,13 +377,20 @@ namespace DotNetApi.Data
                         using MySqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
                         {
+
                             string baseUrl = $"{request.Scheme}://{request.Host}";
+                            string profilePicturePath = reader.IsDBNull(reader.GetOrdinal("image")) ? "" : reader.GetString("image");
+                            string physicalPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", profilePicturePath.TrimStart('/').Replace("/", Path.DirectorySeparatorChar.ToString()));
+                            string profilePicUrl;
+                            if (!string.IsNullOrEmpty(profilePicturePath) && System.IO.File.Exists(physicalPath))
+                            {
+                                profilePicUrl = $"{baseUrl}/{profilePicturePath}";
+                            }
+                            else
+                            {
 
-                            string? imagePath = reader.IsDBNull(reader.GetOrdinal("image")) ? null : reader.GetString("image");
-
-                            string profilePicUrl = string.IsNullOrWhiteSpace(imagePath)
-                                ? $"{baseUrl}/uploads/listing_pictures/default-avatar.jpeg"
-                                : $"{baseUrl}/{imagePath}";
+                                profilePicUrl = $"{baseUrl}/uploads/listing_pictures/default-avatar.jpeg";
+                            }
 
                             listings.Add(new Listing
                             {

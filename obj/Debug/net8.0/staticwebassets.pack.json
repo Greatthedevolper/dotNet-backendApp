@@ -13,12 +13,24 @@
       "PackagePath": "staticwebassets\\uploads\\listing_pictures\\37b04838-305b-4cce-82e8-008f176f0b10.png"
     },
     {
+      "Id": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\81b022c5-605a-485c-8a54-6342069ab863.png",
+      "PackagePath": "staticwebassets\\uploads\\listing_pictures\\81b022c5-605a-485c-8a54-6342069ab863.png"
+    },
+    {
       "Id": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\default-avatar.jpeg",
       "PackagePath": "staticwebassets\\uploads\\listing_pictures\\default-avatar.jpeg"
     },
     {
+      "Id": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\f6752f65-4daf-47f9-ada7-9c9682549a3d.png",
+      "PackagePath": "staticwebassets\\uploads\\listing_pictures\\f6752f65-4daf-47f9-ada7-9c9682549a3d.png"
+    },
+    {
       "Id": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\profile_pictures\\default-avatar.jpeg",
       "PackagePath": "staticwebassets\\uploads\\profile_pictures\\default-avatar.jpeg"
+    },
+    {
+      "Id": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\profile_pictures\\f49ce756-aa1a-486d-8dea-9631427d60e1.webp",
+      "PackagePath": "staticwebassets\\uploads\\profile_pictures\\f49ce756-aa1a-486d-8dea-9631427d60e1.webp"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.DotnetApi.Microsoft.AspNetCore.StaticWebAssets.props",

@@ -58,9 +58,6 @@ namespace DotNetApi.Controllers
                 
                 profilePicUrl = $"{baseUrl}/uploads/profile_pictures/default-avatar.jpeg";
             }
-            // string profilePicUrl = string.IsNullOrEmpty(currentUser.ProfilePicture)
-            //     ? $"{baseUrl}/uploads/profile_pictures/default-avatar.jpeg"
-            //     : $"{baseUrl}{currentUser.ProfilePicture}";
 
             return Ok(new
             {
