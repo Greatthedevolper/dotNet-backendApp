@@ -25,7 +25,7 @@ namespace DotNetApi.Controllers
         [HttpGet]
         public ActionResult<object> GetListings([FromQuery] int page = 1, [FromQuery] int pageSize = 10, [FromQuery] string search = "")
         {
-            var result = _listingRepository.GetAllListings(page, pageSize, search,HttpContext.Request);
+            var result = _listingRepository.GetAllListings(page, pageSize, search, HttpContext.Request);
 
             if (result == null || result.Data == null || ((dynamic)result.Data).listings.Count == 0)
             {
@@ -79,6 +79,12 @@ namespace DotNetApi.Controllers
             if (dto == null)
                 return BadRequest(new { status = false, message = "Invalid data." });
 
+            // Validate required fields for new listings
+            if (dto.Id == 0 && dto.ImageFile == null && string.IsNullOrEmpty(dto.ExistingImage))
+            {
+                return BadRequest(new { status = false, message = "Image is required for new listings." });
+            }
+
             // Convert DTO to Listing model
             var listing = new Listing
             {
@@ -89,23 +95,44 @@ namespace DotNetApi.Controllers
                 Tags = dto.Tags ?? string.Empty,
                 Email = dto.Email ?? string.Empty,
                 Link = dto.Link ?? string.Empty,
-                Approved = dto.Approved,
-                Image = null // You'll assign this in SaveListing after saving the image
+                Approved = dto.Approved
+                // Image will be handled by the repository
             };
 
-            bool isSaved = _listingRepository.SaveListing(listing, dto.ImageFile);
+            try
+            {
+                bool isSaved = _listingRepository.SaveListing(
+                    listing,
+                    dto.ImageFile,
+                    dto.ExistingImage
+                );
 
-            if (isSaved)
-            {
-                return Ok(new
+                if (isSaved)
                 {
-                    status = true,
-                    message = listing.Id == 0 ? "Listing created successfully." : "Listing updated successfully."
-                });
+                    return Ok(new
+                    {
+                        status = true,
+                        message = listing.Id == 0 ? "Listing created successfully." : "Listing updated successfully."
+                    });
+                }
+                else
+                {
+                    return StatusCode(500, new
+                    {
+                        status = false,
+                        message = "An error occurred while saving the listing."
+                    });
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return StatusCode(500, new { status = false, message = "An error occurred while saving the listing." });
+                // Log the exception here
+                return StatusCode(500, new
+                {
+                    status = false,
+                    message = "An unexpected error occurred.",
+                    error = ex.Message // Only include in development environment
+                });
             }
         }
 
@@ -121,19 +148,21 @@ namespace DotNetApi.Controllers
             public string? Link { get; set; }
             public int Approved { get; set; }
             public IFormFile? ImageFile { get; set; }
+            public string? ExistingImage { get; set; }
         }
 
         [HttpPut("/api/listing/approval")]
-        public IActionResult ListingApproved(int Id,int Approved)
+        public IActionResult ListingApproved(int Id, int Approved)
         {
             if (Id <= 0)
             {
                 return BadRequest(new { status = false, message = "Invalid listing ID." });
             }
 
-            bool isApproved= _listingRepository.ApprovedListing(Id,Approved);
-            if(isApproved){
-            return Ok(new { status = true, message = "Listing status is updated" });
+            bool isApproved = _listingRepository.ApprovedListing(Id, Approved);
+            if (isApproved)
+            {
+                return Ok(new { status = true, message = "Listing status is updated" });
             }
             return BadRequest(new { status = false, message = "Invalid listing ID." });
         }
@@ -145,9 +174,10 @@ namespace DotNetApi.Controllers
                 return BadRequest(new { status = false, message = "Invalid listing ID." });
             }
 
-            bool isApproved= _listingRepository.deleteListing(Id);
-            if(isApproved){
-            return Ok(new { status = true, message = "Listing is deleted" });
+            bool isApproved = _listingRepository.DeleteListing(Id);
+            if (isApproved)
+            {
+                return Ok(new { status = true, message = "Listing is deleted" });
             }
             return BadRequest(new { status = false, message = "Invalid listing ID." });
         }

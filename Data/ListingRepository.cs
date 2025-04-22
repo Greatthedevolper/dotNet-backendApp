@@ -146,15 +146,99 @@ namespace DotNetApi.Data
             return (listing, currentUser);
         }
 
-        public bool SaveListing(Listing listing, IFormFile? imageFile = null)
+        // public bool SaveListing(Listing listing, IFormFile? imageFile = null, string? existingImage = null)
+        // {
+        //     using MySqlConnection conn = _database.GetConnection();
+        //     conn.Open();
+
+        //     string? imagePath = null;
+        //     // Save the image file if provided
+        //     if (imageFile != null && imageFile.Length > 0)
+        //     {
+        //         string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "listing_pictures");
+        //         Directory.CreateDirectory(uploadsFolder);
+        //         string uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(imageFile.FileName);
+        //         string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+        //         using (var stream = new FileStream(filePath, FileMode.Create))
+        //         {
+        //             imageFile.CopyTo(stream);
+        //         }
+
+        //         imagePath = $"uploads/listing_pictures/{uniqueFileName}";
+        //     }
+
+        //     if (listing.Id == 0)
+        //     {
+        //         // CREATE listing
+        //         string insertQuery = @"
+        //         INSERT INTO listings (user_id, title, `desc`, tags, email, link, image, approved, created_at, updated_at)
+        //         VALUES (@userId, @title, @desc, @tags, @email, @link, @image, @approved, NOW(), NOW());";
+
+        //         using MySqlCommand cmd = new(insertQuery, conn);
+        //         cmd.Parameters.AddWithValue("@userId", listing.UserId);
+        //         cmd.Parameters.AddWithValue("@title", listing.Title);
+        //         cmd.Parameters.AddWithValue("@desc", listing.Desc);
+        //         cmd.Parameters.AddWithValue("@tags", listing.Tags);
+        //         cmd.Parameters.AddWithValue("@email", listing.Email);
+        //         cmd.Parameters.AddWithValue("@link", listing.Link);
+        //         cmd.Parameters.AddWithValue("@image", imagePath ?? (object)DBNull.Value);
+        //         cmd.Parameters.AddWithValue("@approved", listing.Approved);
+
+        //         return cmd.ExecuteNonQuery() > 0;
+        //     }
+        //     else
+        //     {
+        //         string? existingImagePath = null;
+        //         string selectQuery = "SELECT image FROM listings WHERE id = @id LIMIT 1;";
+        //         using (MySqlCommand selectCmd = new(selectQuery, conn))
+        //         {
+        //             selectCmd.Parameters.AddWithValue("@id", listing.Id);
+        //             using var reader = selectCmd.ExecuteReader();
+        //             if (reader.Read() && !reader.IsDBNull(reader.GetOrdinal("image")))
+        //             {
+        //                 existingImagePath = reader.GetString("image");
+        //             }
+        //         }
+        //         if (!string.IsNullOrEmpty(existingImagePath) && imagePath != null && existingImagePath != imagePath)
+        //         {
+        //             string fullOldImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", existingImagePath.Replace("/", Path.DirectorySeparatorChar.ToString()));
+        //             if (File.Exists(fullOldImagePath))
+        //             {
+        //                 File.Delete(fullOldImagePath);
+        //             }
+        //         }
+
+        //         // UPDATE listing
+        //         string updateQuery = @"
+        //         UPDATE listings
+        //         SET title = @title, `desc` = @desc, tags = @tags, email = @email, link = @link, image = @image, updated_at = NOW()
+        //         WHERE id = @id;";
+
+        //         using MySqlCommand cmd = new(updateQuery, conn);
+        //         cmd.Parameters.AddWithValue("@id", listing.Id);
+        //         cmd.Parameters.AddWithValue("@title", listing.Title);
+        //         cmd.Parameters.AddWithValue("@desc", listing.Desc);
+        //         cmd.Parameters.AddWithValue("@tags", listing.Tags);
+        //         cmd.Parameters.AddWithValue("@email", listing.Email);
+        //         cmd.Parameters.AddWithValue("@link", listing.Link);
+        //         cmd.Parameters.AddWithValue("@image", imagePath ?? (object)DBNull.Value);
+
+        //         return cmd.ExecuteNonQuery() > 0;
+        //     }
+        // }
+
+        public bool SaveListing(Listing listing, IFormFile? imageFile = null, string? existingImage = null)
         {
             using MySqlConnection conn = _database.GetConnection();
             conn.Open();
 
             string? imagePath = null;
-            // Save the image file if provided
+
+            // Handle image upload/retention
             if (imageFile != null && imageFile.Length > 0)
             {
+                // New image uploaded - process it
                 string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "listing_pictures");
                 Directory.CreateDirectory(uploadsFolder);
                 string uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(imageFile.FileName);
@@ -166,14 +250,45 @@ namespace DotNetApi.Data
                 }
 
                 imagePath = $"uploads/listing_pictures/{uniqueFileName}";
+
+                // Delete old image if it exists
+                if (listing.Id != 0) // Only for updates
+                {
+                    string? oldImagePath = null;
+                    string selectQuery = "SELECT image FROM listings WHERE id = @id LIMIT 1;";
+                    using (MySqlCommand selectCmd = new(selectQuery, conn))
+                    {
+                        selectCmd.Parameters.AddWithValue("@id", listing.Id);
+                        using var reader = selectCmd.ExecuteReader();
+                        if (reader.Read() && !reader.IsDBNull(reader.GetOrdinal("image")))
+                        {
+                            oldImagePath = reader.GetString("image");
+                        }
+                    }
+
+                    if (!string.IsNullOrEmpty(oldImagePath))
+                    {
+                        string fullOldImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", oldImagePath.Replace("/", Path.DirectorySeparatorChar.ToString()));
+                        if (File.Exists(fullOldImagePath))
+                        {
+                            File.Delete(fullOldImagePath);
+                        }
+                    }
+                }
             }
+            else if (!string.IsNullOrEmpty(existingImage))
+            {
+                // No new image uploaded, but existing image provided - keep it
+                imagePath = existingImage;
+            }
+            // else - no image handling needed, will be set to NULL
 
             if (listing.Id == 0)
             {
                 // CREATE listing
                 string insertQuery = @"
-                INSERT INTO listings (user_id, title, `desc`, tags, email, link, image, approved, created_at, updated_at)
-                VALUES (@userId, @title, @desc, @tags, @email, @link, @image, @approved, NOW(), NOW());";
+        INSERT INTO listings (user_id, title, `desc`, tags, email, link, image, approved, created_at, updated_at)
+        VALUES (@userId, @title, @desc, @tags, @email, @link, @image, @approved, NOW(), NOW());";
 
                 using MySqlCommand cmd = new(insertQuery, conn);
                 cmd.Parameters.AddWithValue("@userId", listing.UserId);
@@ -189,31 +304,12 @@ namespace DotNetApi.Data
             }
             else
             {
-                string? existingImagePath = null;
-                string selectQuery = "SELECT image FROM listings WHERE id = @id LIMIT 1;";
-                using (MySqlCommand selectCmd = new(selectQuery, conn))
-                {
-                    selectCmd.Parameters.AddWithValue("@id", listing.Id);
-                    using var reader = selectCmd.ExecuteReader();
-                    if (reader.Read() && !reader.IsDBNull(reader.GetOrdinal("image")))
-                    {
-                        existingImagePath = reader.GetString("image");
-                    }
-                }
-                if (!string.IsNullOrEmpty(existingImagePath) && imagePath != null && existingImagePath != imagePath)
-                {
-                    string fullOldImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", existingImagePath.Replace("/", Path.DirectorySeparatorChar.ToString()));
-                    if (File.Exists(fullOldImagePath))
-                    {
-                        File.Delete(fullOldImagePath);
-                    }
-                }
-
                 // UPDATE listing
                 string updateQuery = @"
-                UPDATE listings
-                SET title = @title, `desc` = @desc, tags = @tags, email = @email, link = @link, image = @image, updated_at = NOW()
-                WHERE id = @id;";
+        UPDATE listings
+        SET title = @title, `desc` = @desc, tags = @tags, email = @email, link = @link, 
+            image = @image, updated_at = NOW()
+        WHERE id = @id;";
 
                 using MySqlCommand cmd = new(updateQuery, conn);
                 cmd.Parameters.AddWithValue("@id", listing.Id);
@@ -239,7 +335,7 @@ namespace DotNetApi.Data
             return cmd.ExecuteNonQuery() > 0;
 
         }
-        public bool deleteListing(int id)
+        public bool DeleteListing(int id)
         {
             using MySqlConnection conn = _database.GetConnection();
             conn.Open();
