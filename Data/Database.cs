@@ -1,6 +1,6 @@
 
 using System;
-using MySql.Data.MySqlClient;
+using MySqlConnector;
 
 namespace DotNetApi.Data
 {

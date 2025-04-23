@@ -46,6 +46,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddScoped<ListingRepository>();
 builder.Services.AddScoped<UserRepository>();
 builder.Services.AddScoped<ProfileRepository>();
+builder.Services.AddScoped<CategoryRepository>();
 builder.Services.AddScoped<EmailService>();
 
 // ✅ Configure Swagger for JWT Authentication

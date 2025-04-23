@@ -7,5 +7,5 @@ public class Category
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
 
-    public virtual ICollection<Listing> Listings { get; set; } = [];
+    // public virtual ICollection<Listing> Listings { get; set; } = [];
 }

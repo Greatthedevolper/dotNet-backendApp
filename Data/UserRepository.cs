@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using MySql.Data.MySqlClient;
+using MySqlConnector;
 using DotNetApi.Models;  // ✅ Ensure correct reference for User
 using BCrypt.Net;
 using DotNetApi.Services;

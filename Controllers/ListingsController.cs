@@ -54,7 +54,7 @@ namespace DotNetApi.Controllers
                 return BadRequest(new { status = false, message = "Invalid listing ID." });
             }
 
-            var (listing, currentUser) = _listingRepository.GetSingleListing(id, Request);
+            var (listing, currentUser,currentCategory) = _listingRepository.GetSingleListing(id, Request);
 
             if (listing == null)
             {
@@ -68,7 +68,8 @@ namespace DotNetApi.Controllers
                 data = new
                 {
                     listing,
-                    user = currentUser
+                    user = currentUser,
+                    category=currentCategory
                 }
             });
         }
@@ -95,7 +96,8 @@ namespace DotNetApi.Controllers
                 Tags = dto.Tags ?? string.Empty,
                 Email = dto.Email ?? string.Empty,
                 Link = dto.Link ?? string.Empty,
-                Approved = dto.Approved
+                Approved = dto.Approved,
+                CategoryId = dto.CategoryId,
                 // Image will be handled by the repository
             };
 
@@ -141,6 +143,7 @@ namespace DotNetApi.Controllers
         {
             public int Id { get; set; }
             public int UserId { get; set; }
+            public int CategoryId { get; set; }
             public string? Title { get; set; }
             public string? Desc { get; set; }
             public string? Tags { get; set; }

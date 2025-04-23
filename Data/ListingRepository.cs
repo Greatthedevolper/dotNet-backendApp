@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
-using MySql.Data.MySqlClient;
+using MySqlConnector;
 using DotNetApi.Models;
 using BCrypt.Net;
-using MySql.Data.MySqlClient.Authentication;
 using Org.BouncyCastle.Asn1.Ocsp;
 
 namespace DotNetApi.Data
@@ -12,11 +11,13 @@ namespace DotNetApi.Data
     {
         private readonly Database _database;
         private readonly UserRepository _userRepository;
+        private readonly CategoryRepository _categoryRepository;
 
-        public ListingRepository(UserRepository userRepository)
+        public ListingRepository(UserRepository userRepository, CategoryRepository categoryRepository)
         {
             _database = new Database();
             _userRepository = userRepository;
+            _categoryRepository = categoryRepository;
         }
 
         public PaginatedResponse GetAllListings(int page, int pageSize, string search, HttpRequest request)
@@ -106,7 +107,7 @@ namespace DotNetApi.Data
                 HasNext = page < totalPages
             };
         }
-        public (Listing? listing, User? currentUser) GetSingleListing(int id, HttpRequest request)
+        public (Listing? listing, User? currentUser,Category? currentCategory) GetSingleListing(int id, HttpRequest request)
         {
             Listing? listing = null;
             using (MySqlConnection conn = _database.GetConnection())
@@ -136,97 +137,19 @@ namespace DotNetApi.Data
                         Link = reader.GetString("link"),
                         Image = profilePicUrl,
                         Approved = reader.GetInt32("approved"),
+                        CategoryId = reader.IsDBNull(reader.GetOrdinal("category_id")) ? null : reader.GetInt32(reader.GetOrdinal("category_id")),
                         CreatedAt = reader.GetDateTime("created_at"),
                         UpdatedAt = reader.GetDateTime("updated_at")
                     };
                 }
             }
             User? currentUser = listing != null ? _userRepository.GetUserById(listing.UserId) : null;
+            Category? currentCategory = listing != null && listing.CategoryId.HasValue ? _categoryRepository.GetSingleCategory(listing.CategoryId.Value) : null;
 
-            return (listing, currentUser);
+            return (listing, currentUser,currentCategory);
         }
 
-        // public bool SaveListing(Listing listing, IFormFile? imageFile = null, string? existingImage = null)
-        // {
-        //     using MySqlConnection conn = _database.GetConnection();
-        //     conn.Open();
 
-        //     string? imagePath = null;
-        //     // Save the image file if provided
-        //     if (imageFile != null && imageFile.Length > 0)
-        //     {
-        //         string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "listing_pictures");
-        //         Directory.CreateDirectory(uploadsFolder);
-        //         string uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(imageFile.FileName);
-        //         string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-        //         using (var stream = new FileStream(filePath, FileMode.Create))
-        //         {
-        //             imageFile.CopyTo(stream);
-        //         }
-
-        //         imagePath = $"uploads/listing_pictures/{uniqueFileName}";
-        //     }
-
-        //     if (listing.Id == 0)
-        //     {
-        //         // CREATE listing
-        //         string insertQuery = @"
-        //         INSERT INTO listings (user_id, title, `desc`, tags, email, link, image, approved, created_at, updated_at)
-        //         VALUES (@userId, @title, @desc, @tags, @email, @link, @image, @approved, NOW(), NOW());";
-
-        //         using MySqlCommand cmd = new(insertQuery, conn);
-        //         cmd.Parameters.AddWithValue("@userId", listing.UserId);
-        //         cmd.Parameters.AddWithValue("@title", listing.Title);
-        //         cmd.Parameters.AddWithValue("@desc", listing.Desc);
-        //         cmd.Parameters.AddWithValue("@tags", listing.Tags);
-        //         cmd.Parameters.AddWithValue("@email", listing.Email);
-        //         cmd.Parameters.AddWithValue("@link", listing.Link);
-        //         cmd.Parameters.AddWithValue("@image", imagePath ?? (object)DBNull.Value);
-        //         cmd.Parameters.AddWithValue("@approved", listing.Approved);
-
-        //         return cmd.ExecuteNonQuery() > 0;
-        //     }
-        //     else
-        //     {
-        //         string? existingImagePath = null;
-        //         string selectQuery = "SELECT image FROM listings WHERE id = @id LIMIT 1;";
-        //         using (MySqlCommand selectCmd = new(selectQuery, conn))
-        //         {
-        //             selectCmd.Parameters.AddWithValue("@id", listing.Id);
-        //             using var reader = selectCmd.ExecuteReader();
-        //             if (reader.Read() && !reader.IsDBNull(reader.GetOrdinal("image")))
-        //             {
-        //                 existingImagePath = reader.GetString("image");
-        //             }
-        //         }
-        //         if (!string.IsNullOrEmpty(existingImagePath) && imagePath != null && existingImagePath != imagePath)
-        //         {
-        //             string fullOldImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", existingImagePath.Replace("/", Path.DirectorySeparatorChar.ToString()));
-        //             if (File.Exists(fullOldImagePath))
-        //             {
-        //                 File.Delete(fullOldImagePath);
-        //             }
-        //         }
-
-        //         // UPDATE listing
-        //         string updateQuery = @"
-        //         UPDATE listings
-        //         SET title = @title, `desc` = @desc, tags = @tags, email = @email, link = @link, image = @image, updated_at = NOW()
-        //         WHERE id = @id;";
-
-        //         using MySqlCommand cmd = new(updateQuery, conn);
-        //         cmd.Parameters.AddWithValue("@id", listing.Id);
-        //         cmd.Parameters.AddWithValue("@title", listing.Title);
-        //         cmd.Parameters.AddWithValue("@desc", listing.Desc);
-        //         cmd.Parameters.AddWithValue("@tags", listing.Tags);
-        //         cmd.Parameters.AddWithValue("@email", listing.Email);
-        //         cmd.Parameters.AddWithValue("@link", listing.Link);
-        //         cmd.Parameters.AddWithValue("@image", imagePath ?? (object)DBNull.Value);
-
-        //         return cmd.ExecuteNonQuery() > 0;
-        //     }
-        // }
 
         public bool SaveListing(Listing listing, IFormFile? imageFile = null, string? existingImage = null)
         {
@@ -287,8 +210,8 @@ namespace DotNetApi.Data
             {
                 // CREATE listing
                 string insertQuery = @"
-        INSERT INTO listings (user_id, title, `desc`, tags, email, link, image, approved, created_at, updated_at)
-        VALUES (@userId, @title, @desc, @tags, @email, @link, @image, @approved, NOW(), NOW());";
+        INSERT INTO listings (user_id, title, `desc`, tags, email, link, image, approved,category_id, created_at, updated_at)
+        VALUES (@userId, @title, @desc, @tags, @email, @link, @image, @approved,@categoryId, NOW(), NOW());";
 
                 using MySqlCommand cmd = new(insertQuery, conn);
                 cmd.Parameters.AddWithValue("@userId", listing.UserId);
@@ -299,6 +222,7 @@ namespace DotNetApi.Data
                 cmd.Parameters.AddWithValue("@link", listing.Link);
                 cmd.Parameters.AddWithValue("@image", imagePath ?? (object)DBNull.Value);
                 cmd.Parameters.AddWithValue("@approved", listing.Approved);
+                cmd.Parameters.AddWithValue("@categoryId", listing.CategoryId ?? (object)DBNull.Value);
 
                 return cmd.ExecuteNonQuery() > 0;
             }
@@ -308,7 +232,7 @@ namespace DotNetApi.Data
                 string updateQuery = @"
         UPDATE listings
         SET title = @title, `desc` = @desc, tags = @tags, email = @email, link = @link, 
-            image = @image, updated_at = NOW()
+            image = @image,category_id=@categoryId, updated_at = NOW()
         WHERE id = @id;";
 
                 using MySqlCommand cmd = new(updateQuery, conn);
@@ -319,6 +243,7 @@ namespace DotNetApi.Data
                 cmd.Parameters.AddWithValue("@email", listing.Email);
                 cmd.Parameters.AddWithValue("@link", listing.Link);
                 cmd.Parameters.AddWithValue("@image", imagePath ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@categoryId", listing.CategoryId ?? (object)DBNull.Value);
 
                 return cmd.ExecuteNonQuery() > 0;
             }
