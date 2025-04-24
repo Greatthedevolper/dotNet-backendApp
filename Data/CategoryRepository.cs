@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using MySqlConnector;
-using DotNetApi.Models;
 using BCrypt.Net;
+using DotNetApi.Models;
+using MySqlConnector;
 using Org.BouncyCastle.Asn1.Ocsp;
 
 namespace DotNetApi.Data
@@ -27,9 +27,10 @@ namespace DotNetApi.Data
                 try
                 {
                     conn.Open();
-                    string query = @"
+                    string query =
+                        @"
                 SELECT * FROM categories
-                WHERE (@Search IS NULL OR @Search = '' OR  name LIKE @Search OR `slug` LIKE @Search)";
+                WHERE (@Search IS NULL OR @Search = '' OR  name LIKE @Search OR `description` LIKE @Search OR `slug` LIKE @Search)";
 
                     using MySqlCommand cmd = new(query, conn);
                     cmd.Parameters.AddWithValue("@Search", $"%{search}%");
@@ -37,14 +38,19 @@ namespace DotNetApi.Data
                     using MySqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        categories.Add(new Category
-                        {
-                            Id = reader.GetInt32("id"),
-                            Name = reader.GetString("name"),
-                            Slug = reader.GetString("slug"),
-                            CreatedAt = reader.GetDateTime("created_at"),
-                            UpdatedAt = reader.GetDateTime("updated_at")
-                        });
+                        categories.Add(
+                            new Category
+                            {
+                                Id = reader.GetInt32("id"),
+                                Name = reader.GetString("name"),
+                                Description = reader.IsDBNull(reader.GetOrdinal("description"))
+                                    ? null
+                                    : reader.GetString(reader.GetOrdinal("description")),
+                                Slug = reader.GetString("slug"),
+                                CreatedAt = reader.GetDateTime("created_at"),
+                                UpdatedAt = reader.GetDateTime("updated_at"),
+                            }
+                        );
                     }
                 }
                 catch (Exception ex)
@@ -53,9 +59,9 @@ namespace DotNetApi.Data
                 }
             }
 
-
             return categories;
         }
+
         public Category? GetSingleCategory(int id)
         {
             Category? category = null;
@@ -72,9 +78,12 @@ namespace DotNetApi.Data
                     {
                         Id = reader.GetInt32("id"),
                         Name = reader.GetString("name"),
+                        Description = reader.IsDBNull(reader.GetOrdinal("description"))
+                            ? null
+                            : reader.GetString(reader.GetOrdinal("description")),
                         Slug = reader.GetString("slug"),
                         CreatedAt = reader.GetDateTime("created_at"),
-                        UpdatedAt = reader.GetDateTime("updated_at")
+                        UpdatedAt = reader.GetDateTime("updated_at"),
                     };
                 }
             }
@@ -82,20 +91,19 @@ namespace DotNetApi.Data
             return category;
         }
 
-        public bool SaveCategory(string? categoryName = null)
+        public bool SaveCategory(string? categoryName = null, string? categoryDescription = null)
         {
             using MySqlConnection conn = _database.GetConnection();
             conn.Open();
-            string insertQuery = @"
-        INSERT INTO categories (name,slug, created_at, updated_at)
-        VALUES (@name, @slug, NOW(), NOW());";
+            string insertQuery =
+                @"INSERT INTO categories (name,description,slug, created_at, updated_at) VALUES (@name,@description, @slug, NOW(), NOW());";
 
             using MySqlCommand cmd = new(insertQuery, conn);
             cmd.Parameters.AddWithValue("@name", categoryName);
+            cmd.Parameters.AddWithValue("@description", categoryDescription);
             cmd.Parameters.AddWithValue("@slug", "/" + categoryName);
 
             return cmd.ExecuteNonQuery() > 0;
-
         }
 
         public bool DeleteCategory(int id)
@@ -106,9 +114,6 @@ namespace DotNetApi.Data
             using MySqlCommand cmd = new(approvalQuery, conn);
             cmd.Parameters.AddWithValue("@id", id);
             return cmd.ExecuteNonQuery() > 0;
-
         }
-
     }
 }
-

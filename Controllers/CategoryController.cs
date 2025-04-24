@@ -38,13 +38,17 @@ namespace DotNetApi.Controllers
             return Ok(result);
         }
         [HttpPost]
-        public IActionResult CreateCategory([FromQuery] string name)
+        public IActionResult CreateCategory([FromQuery] string name,string description)
         {
             if (string.IsNullOrEmpty(name))
             {
                 return BadRequest(new { status = false, message = "category name is required." });
             }
-            var isAdded = _categoryRepository.SaveCategory(name);
+            if (string.IsNullOrEmpty(description))
+            {
+                return BadRequest(new { status = false, message = "category description is required." });
+            }
+            var isAdded = _categoryRepository.SaveCategory(name,description);
 
             if (isAdded)
             {

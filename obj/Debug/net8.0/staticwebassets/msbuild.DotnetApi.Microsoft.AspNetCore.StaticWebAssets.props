@@ -192,6 +192,22 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\listing_pictures\8c0d57fd-5960-40d9-a384-9092baeebef7.png))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\listing_pictures\b9a8fa73-b23b-45d1-ac52-e66c5507af59.png))">
+      <SourceType>Package</SourceType>
+      <SourceId>DotnetApi</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/DotnetApi</BasePath>
+      <RelativePath>uploads/listing_pictures/b9a8fa73-b23b-45d1-ac52-e66c5507af59.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\listing_pictures\b9a8fa73-b23b-45d1-ac52-e66c5507af59.png))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\uploads\listing_pictures\dd145f53-cc8c-4df9-b7ad-18f8dd38e158.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>DotnetApi</SourceId>

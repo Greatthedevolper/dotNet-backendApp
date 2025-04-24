@@ -1,4 +1,3 @@
-
 using System;
 using MySqlConnector;
 
@@ -6,7 +5,8 @@ namespace DotNetApi.Data
 {
     class Database
     {
-        private string connectionString = "server=localhost;database=listing_dotnet;user=root;password='';";
+        private string connectionString =
+            "server=localhost;database=listing_dotnet;user=root;password='';";
 
         public MySqlConnection GetConnection()
         {
