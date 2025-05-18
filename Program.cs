@@ -1,26 +1,31 @@
-using DotNetApi.Services;
+using System.Text;
 using DotNetApi.Data;
+using DotNetApi.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // ✅ Enable CORS
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowNuxtFrontend", policy =>
-    {
-        policy.WithOrigins("http://localhost:4000") // Allow only Nuxt frontend
-              .AllowAnyHeader()
-              .AllowAnyMethod()
-              .AllowCredentials(); // If using authentication
-    });
+    options.AddPolicy(
+        "AllowNuxtFrontend",
+        policy =>
+        {
+            policy
+                .WithOrigins("http://localhost:4000") // Allow only Nuxt frontend
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials(); // If using authentication
+        }
+    );
 });
 
 // ✅ Add Authentication & JWT Configuration
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+builder
+    .Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
         options.TokenValidationParameters = new TokenValidationParameters
@@ -29,9 +34,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateAudience = true,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            ValidIssuer = "http://localhost:5067",  // ✅ Must match token issuer
+            ValidIssuer = "http://localhost:5067", // ✅ Must match token issuer
             ValidAudience = "http://localhost:4000", // ✅ Must match token audience
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("95c6ce46bc28fe3cad21b6460c30b92a")) // ✅ Must match secret key
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes("95c6ce46bc28fe3cad21b6460c30b92a")
+            ), // ✅ Must match secret key
         };
     });
 
@@ -52,38 +59,46 @@ builder.Services.AddScoped<EmailService>();
 // ✅ Configure Swagger for JWT Authentication
 builder.Services.AddSwaggerGen(options =>
 {
-    options.SwaggerDoc("v1", new OpenApiInfo
-    {
-        Title = "Listing API",
-        Version = "v1",
-        Description = "This is the API for my Nuxt + .NET full-stack app about listings."
-    });
+    options.SwaggerDoc(
+        "v1",
+        new OpenApiInfo
+        {
+            Title = "Listing API",
+            Version = "v1",
+            Description = "This is the API for my Nuxt + .NET full-stack app about listings.",
+        }
+    );
 
     // 🔹 Enable JWT authentication in Swagger UI
-    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-    {
-        Name = "Authorization",
-        Type = SecuritySchemeType.Http,
-        Scheme = "Bearer",
-        BearerFormat = "JWT",
-        In = ParameterLocation.Header,
-        Description = "Enter 'Bearer {your_token_here}' to authenticate.",
-    });
-
-    options.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
+    options.AddSecurityDefinition(
+        "Bearer",
+        new OpenApiSecurityScheme
         {
-            new OpenApiSecurityScheme
-            {
-                Reference = new OpenApiReference
-                {
-                    Type = ReferenceType.SecurityScheme,
-                    Id = "Bearer"
-                }
-            },
-            new string[] {}
+            Name = "Authorization",
+            Type = SecuritySchemeType.Http,
+            Scheme = "Bearer",
+            BearerFormat = "JWT",
+            In = ParameterLocation.Header,
+            Description = "Enter 'Bearer {your_token_here}' to authenticate.",
         }
-    });
+    );
+
+    options.AddSecurityRequirement(
+        new OpenApiSecurityRequirement
+        {
+            {
+                new OpenApiSecurityScheme
+                {
+                    Reference = new OpenApiReference
+                    {
+                        Type = ReferenceType.SecurityScheme,
+                        Id = "Bearer",
+                    },
+                },
+                new string[] { }
+            },
+        }
+    );
 });
 
 var app = builder.Build();

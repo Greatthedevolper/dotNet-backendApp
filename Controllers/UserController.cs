@@ -1,15 +1,15 @@
-using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using DotNetApi.Services;
-using DotNetApi.Models;
-using DotNetApi.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.AspNetCore.Identity.Data;
+using System.Threading.Tasks;
+using DotNetApi.Data;
+using DotNetApi.Models;
+using DotNetApi.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity.Data;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace DotNetApi.Controllers // ✅ Ensure correct namespace
 {
@@ -17,7 +17,7 @@ namespace DotNetApi.Controllers // ✅ Ensure correct namespace
     [Route("api/users")]
     public class UserController : ControllerBase
     {
-        private readonly UserRepository _userRepository;    
+        private readonly UserRepository _userRepository;
         private readonly EmailService _emailService;
 
         public UserController(UserRepository userRepository, EmailService emailService)
@@ -35,12 +35,18 @@ namespace DotNetApi.Controllers // ✅ Ensure correct namespace
         [HttpPost("register")]
         public IActionResult Register([FromBody] RegisterRequest model)
         {
-            if (string.IsNullOrEmpty(model.Name) || string.IsNullOrEmpty(model.Email) || string.IsNullOrEmpty(model.Password))
+            if (
+                string.IsNullOrEmpty(model.Name)
+                || string.IsNullOrEmpty(model.Email)
+                || string.IsNullOrEmpty(model.Password)
+            )
             {
-                return BadRequest(new { status = false, message = "Name, email, and password are required." });
+                return BadRequest(
+                    new { status = false, message = "Name, email, and password are required." }
+                );
             }
 
-            var existingUser = _userRepository.GetUserByEmail(model.Email,HttpContext.Request);
+            var existingUser = _userRepository.GetUserByEmail(model.Email, HttpContext.Request);
             if (existingUser != null)
             {
                 return Conflict(new { status = false, message = "User already exists." });
@@ -50,29 +56,42 @@ namespace DotNetApi.Controllers // ✅ Ensure correct namespace
 
             if (createdUser == null)
             {
-                return StatusCode(500, new { status = false, message = "User registration failed." });
+                return StatusCode(
+                    500,
+                    new { status = false, message = "User registration failed." }
+                );
             }
 
-            return Ok(new { status = true, message = "You have successfully registered. Please check your email for verification." });
-
+            return Ok(
+                new
+                {
+                    status = true,
+                    message = "You have successfully registered. Please check your email for verification.",
+                }
+            );
         }
+
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginRequest model)
         {
             if (string.IsNullOrEmpty(model.Email) || string.IsNullOrEmpty(model.Password))
             {
-                return BadRequest(new { status = false, message = "Email and password are required." });
+                return BadRequest(
+                    new { status = false, message = "Email and password are required." }
+                );
             }
 
             // Check if user exists
-            var user = _userRepository.GetUserByEmail(model.Email,HttpContext.Request);
+            var user = _userRepository.GetUserByEmail(model.Email, HttpContext.Request);
             if (user == null)
             {
                 return Unauthorized(new { status = false, message = "Email doesn't exist" });
             }
             if (user?.EmailVerifiedAt == null)
             {
-                return Unauthorized(new { status = false, message = "Please verify your email before logging in." });
+                return Unauthorized(
+                    new { status = false, message = "Please verify your email before logging in." }
+                );
             }
             bool isValidPassword = _userRepository.VerifyPassword(model.Email, model.Password);
             if (!isValidPassword)
@@ -83,17 +102,28 @@ namespace DotNetApi.Controllers // ✅ Ensure correct namespace
             // Generate JWT Token
             string token = GenerateJwtToken(user);
 
-            return Ok(new { status = true, message = "Login successful.", token, user = user });
+            return Ok(
+                new
+                {
+                    status = true,
+                    message = "Login successful.",
+                    token,
+                    user = user,
+                }
+            );
         }
+
         [HttpPost("verify-account")]
         public IActionResult VerifyUser([FromBody] VerifyRequest model)
         {
             if (string.IsNullOrEmpty(model.Email) || string.IsNullOrEmpty(model.Token))
             {
-                return BadRequest(new { status = false, message = "Email and Token are required." });
+                return BadRequest(
+                    new { status = false, message = "Email and Token are required." }
+                );
             }
 
-            var user = _userRepository.GetUserByEmail(model.Email,HttpContext.Request);
+            var user = _userRepository.GetUserByEmail(model.Email, HttpContext.Request);
             if (user == null)
             {
                 return Unauthorized(new { status = false, message = "Email doesn't exist." });
@@ -119,19 +149,28 @@ namespace DotNetApi.Controllers // ✅ Ensure correct namespace
             {
                 return BadRequest(new { status = false, message = "Email is required." });
             }
-            var user = _userRepository.GetUserByEmail(model.Email,HttpContext.Request);
+            var user = _userRepository.GetUserByEmail(model.Email, HttpContext.Request);
             if (user == null)
             {
                 return Unauthorized(new { status = false, message = "Email doesn't exist." });
             }
             if (user?.EmailVerifiedAt == null)
             {
-                return Unauthorized(new { status = false, message = "please verify your email before resetting password." });
+                return Unauthorized(
+                    new
+                    {
+                        status = false,
+                        message = "please verify your email before resetting password.",
+                    }
+                );
             }
             bool emailSent = _userRepository.SendResetPasswordEmail(model.Email);
             if (!emailSent)
             {
-                return StatusCode(500, new { status = false, message = "Failed to send reset password email." });
+                return StatusCode(
+                    500,
+                    new { status = false, message = "Failed to send reset password email." }
+                );
             }
             return Ok(new { status = true, message = "Reset password link sent to your email." });
         }
@@ -143,14 +182,20 @@ namespace DotNetApi.Controllers // ✅ Ensure correct namespace
             {
                 return BadRequest(new { status = false, message = "Email is required." });
             }
-            var user = _userRepository.GetUserByEmail(model.Email,HttpContext.Request);
+            var user = _userRepository.GetUserByEmail(model.Email, HttpContext.Request);
             if (user == null)
             {
                 return Unauthorized(new { status = false, message = "Email doesn't exist." });
             }
             if (user?.EmailVerifiedAt == null)
             {
-                return Unauthorized(new { status = false, message = "please verify your email before resetting password." });
+                return Unauthorized(
+                    new
+                    {
+                        status = false,
+                        message = "please verify your email before resetting password.",
+                    }
+                );
             }
             if (string.IsNullOrEmpty(model.Token))
             {
@@ -166,32 +211,58 @@ namespace DotNetApi.Controllers // ✅ Ensure correct namespace
             }
             if (string.IsNullOrEmpty(model.ConfirmPassword))
             {
-                return BadRequest(new { status = false, message = "Confirm Password is required." });
+                return BadRequest(
+                    new { status = false, message = "Confirm Password is required." }
+                );
             }
             if (model.ConfirmPassword != model.NewPassword)
             {
-                return BadRequest(new { status = false, message = "New Password And Confirm Password are not matched." });
+                return BadRequest(
+                    new
+                    {
+                        status = false,
+                        message = "New Password And Confirm Password are not matched.",
+                    }
+                );
             }
 
-            bool updated = _userRepository.UpdatePassword(model.Email, model.Token, model.NewPassword);
+            bool updated = _userRepository.UpdatePassword(
+                model.Email,
+                model.Token,
+                model.NewPassword
+            );
             if (!updated)
             {
-                return StatusCode(500, new { status = false, message = "Failed to reset password." });
+                return StatusCode(
+                    500,
+                    new { status = false, message = "Failed to reset password." }
+                );
             }
             return Ok(new { status = true, message = "password reset successfully" });
         }
 
         // [Authorize]
         [HttpGet("dashboard")]
-        public IActionResult Dashboard([FromQuery] int page = 1, [FromQuery] int pageSize = 10, [FromQuery] string search = "")
+        public IActionResult Dashboard(
+            [FromQuery] int page = 1,
+            [FromQuery] int pageSize = 10,
+            [FromQuery] string search = ""
+        )
         {
-
-            var userEmail = User.FindFirstValue(JwtRegisteredClaimNames.Email) ?? User.FindFirstValue(ClaimTypes.Email);
+            var userEmail =
+                User.FindFirstValue(JwtRegisteredClaimNames.Email)
+                ?? User.FindFirstValue(ClaimTypes.Email);
             var userIdClaim = User.FindFirstValue("user_id");
 
             if (string.IsNullOrEmpty(userEmail) || string.IsNullOrEmpty(userIdClaim))
             {
-                return Unauthorized(new { status = false, message = "User email or user ID is not available in JWT." });
+                return Unauthorized(
+                    new
+                    {
+                        status = false,
+                        message = "User email or user ID is not available in JWT.",
+                    }
+                );
             }
 
             if (!int.TryParse(userIdClaim, out int userId))
@@ -199,7 +270,7 @@ namespace DotNetApi.Controllers // ✅ Ensure correct namespace
                 return Unauthorized(new { status = false, message = "Invalid user ID format." });
             }
 
-            var user = _userRepository.GetUserByEmail(userEmail,HttpContext.Request);
+            var user = _userRepository.GetUserByEmail(userEmail, HttpContext.Request);
             if (user == null)
             {
                 return Unauthorized(new { status = false, message = "Email is not registered." });
@@ -212,33 +283,51 @@ namespace DotNetApi.Controllers // ✅ Ensure correct namespace
 
             if (!string.Equals(user.Role, "user", StringComparison.OrdinalIgnoreCase))
             {
-                return Unauthorized(new { status = false, message = "You are not authorized to access this resource." });
+                return Unauthorized(
+                    new
+                    {
+                        status = false,
+                        message = "You are not authorized to access this resource.",
+                    }
+                );
             }
-            var result = _userRepository.GetUserListings(page, pageSize, search, userId, HttpContext.Request);
+            var result = _userRepository.GetUserListings(
+                page,
+                pageSize,
+                search,
+                userId,
+                HttpContext.Request
+            );
             if (result == null || result.Data == null || ((dynamic)result.Data).listings.Count == 0)
             {
-                return NotFound(new
-                {
-                    message = "No listings found.",
-                    statusCode = 404,
-                    data = new { listings = new List<Listing>(), top4Listings = new List<object>() },
-                    currentPage = page,
-                    pageSize = pageSize,
-                    totalCount = 0,
-                    totalPages = 0,
-                    hasPrevious = false,
-                    hasNext = false
-                });
+                return NotFound(
+                    new
+                    {
+                        message = "No listings found.",
+                        statusCode = 404,
+                        data = new
+                        {
+                            listings = new List<Listing>(),
+                            top4Listings = new List<object>(),
+                        },
+                        currentPage = page,
+                        pageSize = pageSize,
+                        totalCount = 0,
+                        totalPages = 0,
+                        hasPrevious = false,
+                        hasNext = false,
+                    }
+                );
             }
 
             return Ok(result);
         }
 
-
-
         static string GenerateJwtToken(User user)
         {
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("95c6ce46bc28fe3cad21b6460c30b92a"));
+            var key = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes("95c6ce46bc28fe3cad21b6460c30b92a")
+            );
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             const string ProfilePictureClaimType = "profile_picture";
 
@@ -251,7 +340,7 @@ namespace DotNetApi.Controllers // ✅ Ensure correct namespace
                 new Claim(ClaimTypes.Name, user.Name),
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.Role, user.Role ?? "User"),
-                new Claim(ProfilePictureClaimType, user.ProfilePicture ?? "")
+                new Claim(ProfilePictureClaimType, user.ProfilePicture ?? ""),
             };
 
             var token = new JwtSecurityToken(
@@ -271,16 +360,19 @@ namespace DotNetApi.Controllers // ✅ Ensure correct namespace
             public string? Email { get; set; }
             public string? Password { get; set; }
         }
+
         public class LoginRequest
         {
             public string? Email { get; set; }
             public string? Password { get; set; }
         }
+
         public class VerifyRequest
         {
             public string? Email { get; set; }
             public string? Token { get; set; }
         }
+
         public class ResetPasswordRequest
         {
             public string? Email { get; set; }
@@ -288,17 +380,15 @@ namespace DotNetApi.Controllers // ✅ Ensure correct namespace
             public string? NewPassword { get; set; }
             public string? ConfirmPassword { get; set; }
         }
+
         public class ForgotPassword
         {
             public string? Email { get; set; }
         }
+
         public class GetListing
         {
             public int UserId { get; set; }
         }
-
     }
 }
-
-
-

@@ -53,3 +53,6 @@ D:\All-Projects\DotNet\fullstack-app\DotnetApi\obj\Debug\net8.0\refint\DotnetApi
 D:\All-Projects\DotNet\fullstack-app\DotnetApi\obj\Debug\net8.0\DotnetApi.pdb
 D:\All-Projects\DotNet\fullstack-app\DotnetApi\obj\Debug\net8.0\DotnetApi.genruntimeconfig.cache
 D:\All-Projects\DotNet\fullstack-app\DotnetApi\obj\Debug\net8.0\ref\DotnetApi.dll
+D:\All-Projects\DotNet\fullstack-app\DotnetApi\bin\Debug\net8.0\DotnetApi.staticwebassets.endpoints.json
+D:\All-Projects\DotNet\fullstack-app\DotnetApi\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+D:\All-Projects\DotNet\fullstack-app\DotnetApi\obj\Debug\net8.0\staticwebassets\msbuild.DotnetApi.Microsoft.AspNetCore.StaticWebAssetEndpoints.props

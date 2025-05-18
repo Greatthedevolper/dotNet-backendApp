@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using MySqlConnector;
 using DotNetApi.Models;
 using DotNetApi.Services;
 using Microsoft.AspNetCore.Http.HttpResults;
+using MySqlConnector;
 
 namespace DotNetApi.Data
 {
@@ -43,6 +43,7 @@ namespace DotNetApi.Data
                 return false;
             }
         }
+
         public string? GetExistingProfileImagePath(int userId)
         {
             try
@@ -81,7 +82,6 @@ namespace DotNetApi.Data
                     return false;
                 }
                 return true;
-
             }
             catch (Exception ex)
             {

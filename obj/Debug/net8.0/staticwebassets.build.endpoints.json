@@ -1,472 +1,19 @@
 {
   "Version": 1,
-  "Hash": "ViCowA4yvGjsDwC4mlkptcDoWkRj3l0t/XCEyYtOFaY=",
-  "Source": "DotnetApi",
-  "BasePath": "_content/DotnetApi",
-  "Mode": "Default",
   "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [
-    {
-      "Name": "DotnetApi\\wwwroot",
-      "Source": "DotnetApi",
-      "ContentRoot": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\",
-      "BasePath": "_content/DotnetApi",
-      "Pattern": "**"
-    }
-  ],
-  "Assets": [
-    {
-      "Identity": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\css\\swagger-ui-dark.css",
-      "SourceId": "DotnetApi",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\",
-      "BasePath": "_content/DotnetApi",
-      "RelativePath": "css/swagger-ui-dark#[.{fingerprint}]?.css",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "Fingerprint": "h1t8ro1981",
-      "Integrity": "BfBE2yl28v5Oyu0vVAaJ8DAvv7HrgASQT5mpRK0yKDo=",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\swagger-ui-dark.css"
-    },
-    {
-      "Identity": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\1498287e-a967-4088-8c15-b3ef6039d3a2.png",
-      "SourceId": "DotnetApi",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\",
-      "BasePath": "_content/DotnetApi",
-      "RelativePath": "uploads/listing_pictures/1498287e-a967-4088-8c15-b3ef6039d3a2#[.{fingerprint}]?.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "Fingerprint": "mlx5m86wz7",
-      "Integrity": "pnChknrDp6iw4qhiz/XT90FbeoaZURG5ED3jwecG/Fw=",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\uploads\\listing_pictures\\1498287e-a967-4088-8c15-b3ef6039d3a2.png"
-    },
-    {
-      "Identity": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\2499966e-8884-44b8-930d-82d34dff9dd8.png",
-      "SourceId": "DotnetApi",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\",
-      "BasePath": "_content/DotnetApi",
-      "RelativePath": "uploads/listing_pictures/2499966e-8884-44b8-930d-82d34dff9dd8#[.{fingerprint}]?.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "Fingerprint": "3azq3vmzdj",
-      "Integrity": "5evuLakXgryIxmE9Tn9VEbTdUzczXCQM9TfjF6BoP90=",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\uploads\\listing_pictures\\2499966e-8884-44b8-930d-82d34dff9dd8.png"
-    },
-    {
-      "Identity": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\305b3336-655f-473d-8edd-7533278be9aa.jpg",
-      "SourceId": "DotnetApi",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\",
-      "BasePath": "_content/DotnetApi",
-      "RelativePath": "uploads/listing_pictures/305b3336-655f-473d-8edd-7533278be9aa#[.{fingerprint}]?.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "Fingerprint": "emk476swkh",
-      "Integrity": "mr+DwbNySADzt2peEPiBTlUDYOZSLljBYi1NYWv70Vs=",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\uploads\\listing_pictures\\305b3336-655f-473d-8edd-7533278be9aa.jpg"
-    },
-    {
-      "Identity": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\37b04838-305b-4cce-82e8-008f176f0b10.png",
-      "SourceId": "DotnetApi",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\",
-      "BasePath": "_content/DotnetApi",
-      "RelativePath": "uploads/listing_pictures/37b04838-305b-4cce-82e8-008f176f0b10#[.{fingerprint}]?.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "Fingerprint": "mlx5m86wz7",
-      "Integrity": "pnChknrDp6iw4qhiz/XT90FbeoaZURG5ED3jwecG/Fw=",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\uploads\\listing_pictures\\37b04838-305b-4cce-82e8-008f176f0b10.png"
-    },
-    {
-      "Identity": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\39cdf232-2eeb-4a1c-ae05-df585c8f3cea.png",
-      "SourceId": "DotnetApi",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\",
-      "BasePath": "_content/DotnetApi",
-      "RelativePath": "uploads/listing_pictures/39cdf232-2eeb-4a1c-ae05-df585c8f3cea#[.{fingerprint}]?.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "Fingerprint": "mlx5m86wz7",
-      "Integrity": "pnChknrDp6iw4qhiz/XT90FbeoaZURG5ED3jwecG/Fw=",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\uploads\\listing_pictures\\39cdf232-2eeb-4a1c-ae05-df585c8f3cea.png"
-    },
-    {
-      "Identity": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\58d697d2-d3f2-47aa-9489-ecf3267105bd.jpg",
-      "SourceId": "DotnetApi",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\",
-      "BasePath": "_content/DotnetApi",
-      "RelativePath": "uploads/listing_pictures/58d697d2-d3f2-47aa-9489-ecf3267105bd#[.{fingerprint}]?.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "Fingerprint": "iifzz5abs6",
-      "Integrity": "ti85GdiQM1Oc5ybzI/KQME4WMQ+9eTklCWRv0EyeVu8=",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\uploads\\listing_pictures\\58d697d2-d3f2-47aa-9489-ecf3267105bd.jpg"
-    },
-    {
-      "Identity": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\5a0fa4f2-567c-4d1b-9963-7238e5d8162b.jpg",
-      "SourceId": "DotnetApi",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\",
-      "BasePath": "_content/DotnetApi",
-      "RelativePath": "uploads/listing_pictures/5a0fa4f2-567c-4d1b-9963-7238e5d8162b#[.{fingerprint}]?.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "Fingerprint": "emk476swkh",
-      "Integrity": "mr+DwbNySADzt2peEPiBTlUDYOZSLljBYi1NYWv70Vs=",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\uploads\\listing_pictures\\5a0fa4f2-567c-4d1b-9963-7238e5d8162b.jpg"
-    },
-    {
-      "Identity": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\61d6ed1c-0d64-45f1-a6fe-005813a307b6.webp",
-      "SourceId": "DotnetApi",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\",
-      "BasePath": "_content/DotnetApi",
-      "RelativePath": "uploads/listing_pictures/61d6ed1c-0d64-45f1-a6fe-005813a307b6#[.{fingerprint}]?.webp",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "Fingerprint": "qzfqakpl31",
-      "Integrity": "ikLdscULJsGD9ibICfWRC/qmZnRLVkpD5K7KobvRFPY=",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\uploads\\listing_pictures\\61d6ed1c-0d64-45f1-a6fe-005813a307b6.webp"
-    },
-    {
-      "Identity": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\7e936e9e-e7f4-4088-bc8f-af7b28e63181.jpg",
-      "SourceId": "DotnetApi",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\",
-      "BasePath": "_content/DotnetApi",
-      "RelativePath": "uploads/listing_pictures/7e936e9e-e7f4-4088-bc8f-af7b28e63181#[.{fingerprint}]?.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "Fingerprint": "1cm6r28nml",
-      "Integrity": "b8YXnp9tbTWd19f5wiYrE5wVg4VtijcOc4w+/FJYD50=",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\uploads\\listing_pictures\\7e936e9e-e7f4-4088-bc8f-af7b28e63181.jpg"
-    },
-    {
-      "Identity": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\81b022c5-605a-485c-8a54-6342069ab863.png",
-      "SourceId": "DotnetApi",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\",
-      "BasePath": "_content/DotnetApi",
-      "RelativePath": "uploads/listing_pictures/81b022c5-605a-485c-8a54-6342069ab863#[.{fingerprint}]?.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "Fingerprint": "im1jipuxv2",
-      "Integrity": "+gTGGHnRtJ1p+WjmgjS54501o7+p3aGCZXBXyih1RX8=",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\uploads\\listing_pictures\\81b022c5-605a-485c-8a54-6342069ab863.png"
-    },
-    {
-      "Identity": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\8c0d57fd-5960-40d9-a384-9092baeebef7.png",
-      "SourceId": "DotnetApi",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\",
-      "BasePath": "_content/DotnetApi",
-      "RelativePath": "uploads/listing_pictures/8c0d57fd-5960-40d9-a384-9092baeebef7#[.{fingerprint}]?.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "Fingerprint": "3azq3vmzdj",
-      "Integrity": "5evuLakXgryIxmE9Tn9VEbTdUzczXCQM9TfjF6BoP90=",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\uploads\\listing_pictures\\8c0d57fd-5960-40d9-a384-9092baeebef7.png"
-    },
-    {
-      "Identity": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\b9a8fa73-b23b-45d1-ac52-e66c5507af59.png",
-      "SourceId": "DotnetApi",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\",
-      "BasePath": "_content/DotnetApi",
-      "RelativePath": "uploads/listing_pictures/b9a8fa73-b23b-45d1-ac52-e66c5507af59#[.{fingerprint}]?.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "Fingerprint": "mlx5m86wz7",
-      "Integrity": "pnChknrDp6iw4qhiz/XT90FbeoaZURG5ED3jwecG/Fw=",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\uploads\\listing_pictures\\b9a8fa73-b23b-45d1-ac52-e66c5507af59.png"
-    },
-    {
-      "Identity": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\d89cc814-5b2f-4f69-b4d5-999edb6f876d.jpg",
-      "SourceId": "DotnetApi",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\",
-      "BasePath": "_content/DotnetApi",
-      "RelativePath": "uploads/listing_pictures/d89cc814-5b2f-4f69-b4d5-999edb6f876d#[.{fingerprint}]?.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "Fingerprint": "1cm6r28nml",
-      "Integrity": "b8YXnp9tbTWd19f5wiYrE5wVg4VtijcOc4w+/FJYD50=",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\uploads\\listing_pictures\\d89cc814-5b2f-4f69-b4d5-999edb6f876d.jpg"
-    },
-    {
-      "Identity": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\dd145f53-cc8c-4df9-b7ad-18f8dd38e158.jpg",
-      "SourceId": "DotnetApi",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\",
-      "BasePath": "_content/DotnetApi",
-      "RelativePath": "uploads/listing_pictures/dd145f53-cc8c-4df9-b7ad-18f8dd38e158#[.{fingerprint}]?.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "Fingerprint": "1cm6r28nml",
-      "Integrity": "b8YXnp9tbTWd19f5wiYrE5wVg4VtijcOc4w+/FJYD50=",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\uploads\\listing_pictures\\dd145f53-cc8c-4df9-b7ad-18f8dd38e158.jpg"
-    },
-    {
-      "Identity": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\default-avatar.jpeg",
-      "SourceId": "DotnetApi",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\",
-      "BasePath": "_content/DotnetApi",
-      "RelativePath": "uploads/listing_pictures/default-avatar#[.{fingerprint}]?.jpeg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "Fingerprint": "vop441ff9u",
-      "Integrity": "8czCbi9iLVzl/QzColmD60oCtlif8LeTnULWxYnb3MY=",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\uploads\\listing_pictures\\default-avatar.jpeg"
-    },
-    {
-      "Identity": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\f2b744fc-66e7-4582-9aaa-90bfcea27cc1.png",
-      "SourceId": "DotnetApi",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\",
-      "BasePath": "_content/DotnetApi",
-      "RelativePath": "uploads/listing_pictures/f2b744fc-66e7-4582-9aaa-90bfcea27cc1#[.{fingerprint}]?.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "Fingerprint": "11vooa5jo1",
-      "Integrity": "67y2T+jp2myOKLWxAy4iby1oHpmU52vrqe9uH80QWOg=",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\uploads\\listing_pictures\\f2b744fc-66e7-4582-9aaa-90bfcea27cc1.png"
-    },
-    {
-      "Identity": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\f6752f65-4daf-47f9-ada7-9c9682549a3d.png",
-      "SourceId": "DotnetApi",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\",
-      "BasePath": "_content/DotnetApi",
-      "RelativePath": "uploads/listing_pictures/f6752f65-4daf-47f9-ada7-9c9682549a3d#[.{fingerprint}]?.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "Fingerprint": "n6hkizru4o",
-      "Integrity": "/4FGCXgPcm4FAif0I2sRUVh1RTNR1CAUL68dyaaRvaw=",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\uploads\\listing_pictures\\f6752f65-4daf-47f9-ada7-9c9682549a3d.png"
-    },
-    {
-      "Identity": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\f785e2e0-1451-4107-bf6d-d6758057e98e.jpg",
-      "SourceId": "DotnetApi",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\",
-      "BasePath": "_content/DotnetApi",
-      "RelativePath": "uploads/listing_pictures/f785e2e0-1451-4107-bf6d-d6758057e98e#[.{fingerprint}]?.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "Fingerprint": "iifzz5abs6",
-      "Integrity": "ti85GdiQM1Oc5ybzI/KQME4WMQ+9eTklCWRv0EyeVu8=",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\uploads\\listing_pictures\\f785e2e0-1451-4107-bf6d-d6758057e98e.jpg"
-    },
-    {
-      "Identity": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\profile_pictures\\default-avatar.jpeg",
-      "SourceId": "DotnetApi",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\",
-      "BasePath": "_content/DotnetApi",
-      "RelativePath": "uploads/profile_pictures/default-avatar#[.{fingerprint}]?.jpeg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "Fingerprint": "vop441ff9u",
-      "Integrity": "8czCbi9iLVzl/QzColmD60oCtlif8LeTnULWxYnb3MY=",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\uploads\\profile_pictures\\default-avatar.jpeg"
-    },
-    {
-      "Identity": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\profile_pictures\\f49ce756-aa1a-486d-8dea-9631427d60e1.webp",
-      "SourceId": "DotnetApi",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\",
-      "BasePath": "_content/DotnetApi",
-      "RelativePath": "uploads/profile_pictures/f49ce756-aa1a-486d-8dea-9631427d60e1#[.{fingerprint}]?.webp",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "Fingerprint": "qzfqakpl31",
-      "Integrity": "ikLdscULJsGD9ibICfWRC/qmZnRLVkpD5K7KobvRFPY=",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\uploads\\profile_pictures\\f49ce756-aa1a-486d-8dea-9631427d60e1.webp"
-    }
-  ],
   "Endpoints": [
     {
       "Route": "css/swagger-ui-dark.css",
-      "AssetFile": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\css\\swagger-ui-dark.css",
+      "AssetFile": "css/swagger-ui-dark.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -483,10 +30,6 @@
         {
           "Name": "Last-Modified",
           "Value": "Tue, 25 Mar 2025 16:34:08 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -498,12 +41,16 @@
     },
     {
       "Route": "css/swagger-ui-dark.h1t8ro1981.css",
-      "AssetFile": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\css\\swagger-ui-dark.css",
+      "AssetFile": "css/swagger-ui-dark.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -520,10 +67,6 @@
         {
           "Name": "Last-Modified",
           "Value": "Tue, 25 Mar 2025 16:34:08 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -532,23 +75,27 @@
           "Value": "h1t8ro1981"
         },
         {
-          "Name": "label",
-          "Value": "css/swagger-ui-dark.css"
-        },
-        {
           "Name": "integrity",
           "Value": "sha256-BfBE2yl28v5Oyu0vVAaJ8DAvv7HrgASQT5mpRK0yKDo="
+        },
+        {
+          "Name": "label",
+          "Value": "css/swagger-ui-dark.css"
         }
       ]
     },
     {
       "Route": "uploads/listing_pictures/1498287e-a967-4088-8c15-b3ef6039d3a2.mlx5m86wz7.png",
-      "AssetFile": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\1498287e-a967-4088-8c15-b3ef6039d3a2.png",
+      "AssetFile": "uploads/listing_pictures/1498287e-a967-4088-8c15-b3ef6039d3a2.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -565,10 +112,6 @@
         {
           "Name": "Last-Modified",
           "Value": "Mon, 14 Apr 2025 22:59:17 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -577,23 +120,27 @@
           "Value": "mlx5m86wz7"
         },
         {
-          "Name": "label",
-          "Value": "uploads/listing_pictures/1498287e-a967-4088-8c15-b3ef6039d3a2.png"
-        },
-        {
           "Name": "integrity",
           "Value": "sha256-pnChknrDp6iw4qhiz/XT90FbeoaZURG5ED3jwecG/Fw="
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/listing_pictures/1498287e-a967-4088-8c15-b3ef6039d3a2.png"
         }
       ]
     },
     {
       "Route": "uploads/listing_pictures/1498287e-a967-4088-8c15-b3ef6039d3a2.png",
-      "AssetFile": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\1498287e-a967-4088-8c15-b3ef6039d3a2.png",
+      "AssetFile": "uploads/listing_pictures/1498287e-a967-4088-8c15-b3ef6039d3a2.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
         },
         {
           "Name": "Content-Length",
@@ -610,10 +157,6 @@
         {
           "Name": "Last-Modified",
           "Value": "Mon, 14 Apr 2025 22:59:17 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=3600, must-revalidate"
         }
       ],
       "EndpointProperties": [
@@ -625,12 +168,16 @@
     },
     {
       "Route": "uploads/listing_pictures/2499966e-8884-44b8-930d-82d34dff9dd8.3azq3vmzdj.png",
-      "AssetFile": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\2499966e-8884-44b8-930d-82d34dff9dd8.png",
+      "AssetFile": "uploads/listing_pictures/2499966e-8884-44b8-930d-82d34dff9dd8.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -647,10 +194,6 @@
         {
           "Name": "Last-Modified",
           "Value": "Tue, 22 Apr 2025 05:14:44 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -659,23 +202,27 @@
           "Value": "3azq3vmzdj"
         },
         {
-          "Name": "label",
-          "Value": "uploads/listing_pictures/2499966e-8884-44b8-930d-82d34dff9dd8.png"
-        },
-        {
           "Name": "integrity",
           "Value": "sha256-5evuLakXgryIxmE9Tn9VEbTdUzczXCQM9TfjF6BoP90="
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/listing_pictures/2499966e-8884-44b8-930d-82d34dff9dd8.png"
         }
       ]
     },
     {
       "Route": "uploads/listing_pictures/2499966e-8884-44b8-930d-82d34dff9dd8.png",
-      "AssetFile": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\2499966e-8884-44b8-930d-82d34dff9dd8.png",
+      "AssetFile": "uploads/listing_pictures/2499966e-8884-44b8-930d-82d34dff9dd8.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
         },
         {
           "Name": "Content-Length",
@@ -692,10 +239,6 @@
         {
           "Name": "Last-Modified",
           "Value": "Tue, 22 Apr 2025 05:14:44 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=3600, must-revalidate"
         }
       ],
       "EndpointProperties": [
@@ -707,12 +250,16 @@
     },
     {
       "Route": "uploads/listing_pictures/305b3336-655f-473d-8edd-7533278be9aa.emk476swkh.jpg",
-      "AssetFile": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\305b3336-655f-473d-8edd-7533278be9aa.jpg",
+      "AssetFile": "uploads/listing_pictures/305b3336-655f-473d-8edd-7533278be9aa.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -729,10 +276,6 @@
         {
           "Name": "Last-Modified",
           "Value": "Tue, 22 Apr 2025 05:41:41 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -741,23 +284,27 @@
           "Value": "emk476swkh"
         },
         {
-          "Name": "label",
-          "Value": "uploads/listing_pictures/305b3336-655f-473d-8edd-7533278be9aa.jpg"
-        },
-        {
           "Name": "integrity",
           "Value": "sha256-mr+DwbNySADzt2peEPiBTlUDYOZSLljBYi1NYWv70Vs="
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/listing_pictures/305b3336-655f-473d-8edd-7533278be9aa.jpg"
         }
       ]
     },
     {
       "Route": "uploads/listing_pictures/305b3336-655f-473d-8edd-7533278be9aa.jpg",
-      "AssetFile": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\305b3336-655f-473d-8edd-7533278be9aa.jpg",
+      "AssetFile": "uploads/listing_pictures/305b3336-655f-473d-8edd-7533278be9aa.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
         },
         {
           "Name": "Content-Length",
@@ -774,10 +321,6 @@
         {
           "Name": "Last-Modified",
           "Value": "Tue, 22 Apr 2025 05:41:41 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=3600, must-revalidate"
         }
       ],
       "EndpointProperties": [
@@ -789,12 +332,16 @@
     },
     {
       "Route": "uploads/listing_pictures/37b04838-305b-4cce-82e8-008f176f0b10.mlx5m86wz7.png",
-      "AssetFile": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\37b04838-305b-4cce-82e8-008f176f0b10.png",
+      "AssetFile": "uploads/listing_pictures/37b04838-305b-4cce-82e8-008f176f0b10.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -811,10 +358,6 @@
         {
           "Name": "Last-Modified",
           "Value": "Sun, 13 Apr 2025 12:07:09 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -823,23 +366,27 @@
           "Value": "mlx5m86wz7"
         },
         {
-          "Name": "label",
-          "Value": "uploads/listing_pictures/37b04838-305b-4cce-82e8-008f176f0b10.png"
-        },
-        {
           "Name": "integrity",
           "Value": "sha256-pnChknrDp6iw4qhiz/XT90FbeoaZURG5ED3jwecG/Fw="
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/listing_pictures/37b04838-305b-4cce-82e8-008f176f0b10.png"
         }
       ]
     },
     {
       "Route": "uploads/listing_pictures/37b04838-305b-4cce-82e8-008f176f0b10.png",
-      "AssetFile": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\37b04838-305b-4cce-82e8-008f176f0b10.png",
+      "AssetFile": "uploads/listing_pictures/37b04838-305b-4cce-82e8-008f176f0b10.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
         },
         {
           "Name": "Content-Length",
@@ -856,10 +403,6 @@
         {
           "Name": "Last-Modified",
           "Value": "Sun, 13 Apr 2025 12:07:09 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=3600, must-revalidate"
         }
       ],
       "EndpointProperties": [
@@ -871,12 +414,16 @@
     },
     {
       "Route": "uploads/listing_pictures/39cdf232-2eeb-4a1c-ae05-df585c8f3cea.mlx5m86wz7.png",
-      "AssetFile": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\39cdf232-2eeb-4a1c-ae05-df585c8f3cea.png",
+      "AssetFile": "uploads/listing_pictures/39cdf232-2eeb-4a1c-ae05-df585c8f3cea.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -893,10 +440,6 @@
         {
           "Name": "Last-Modified",
           "Value": "Tue, 22 Apr 2025 21:43:48 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -905,23 +448,27 @@
           "Value": "mlx5m86wz7"
         },
         {
-          "Name": "label",
-          "Value": "uploads/listing_pictures/39cdf232-2eeb-4a1c-ae05-df585c8f3cea.png"
-        },
-        {
           "Name": "integrity",
           "Value": "sha256-pnChknrDp6iw4qhiz/XT90FbeoaZURG5ED3jwecG/Fw="
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/listing_pictures/39cdf232-2eeb-4a1c-ae05-df585c8f3cea.png"
         }
       ]
     },
     {
       "Route": "uploads/listing_pictures/39cdf232-2eeb-4a1c-ae05-df585c8f3cea.png",
-      "AssetFile": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\39cdf232-2eeb-4a1c-ae05-df585c8f3cea.png",
+      "AssetFile": "uploads/listing_pictures/39cdf232-2eeb-4a1c-ae05-df585c8f3cea.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
         },
         {
           "Name": "Content-Length",
@@ -938,10 +485,6 @@
         {
           "Name": "Last-Modified",
           "Value": "Tue, 22 Apr 2025 21:43:48 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=3600, must-revalidate"
         }
       ],
       "EndpointProperties": [
@@ -953,12 +496,16 @@
     },
     {
       "Route": "uploads/listing_pictures/58d697d2-d3f2-47aa-9489-ecf3267105bd.iifzz5abs6.jpg",
-      "AssetFile": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\58d697d2-d3f2-47aa-9489-ecf3267105bd.jpg",
+      "AssetFile": "uploads/listing_pictures/58d697d2-d3f2-47aa-9489-ecf3267105bd.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -975,10 +522,6 @@
         {
           "Name": "Last-Modified",
           "Value": "Thu, 17 Apr 2025 19:33:31 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -987,23 +530,27 @@
           "Value": "iifzz5abs6"
         },
         {
-          "Name": "label",
-          "Value": "uploads/listing_pictures/58d697d2-d3f2-47aa-9489-ecf3267105bd.jpg"
-        },
-        {
           "Name": "integrity",
           "Value": "sha256-ti85GdiQM1Oc5ybzI/KQME4WMQ+9eTklCWRv0EyeVu8="
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/listing_pictures/58d697d2-d3f2-47aa-9489-ecf3267105bd.jpg"
         }
       ]
     },
     {
       "Route": "uploads/listing_pictures/58d697d2-d3f2-47aa-9489-ecf3267105bd.jpg",
-      "AssetFile": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\58d697d2-d3f2-47aa-9489-ecf3267105bd.jpg",
+      "AssetFile": "uploads/listing_pictures/58d697d2-d3f2-47aa-9489-ecf3267105bd.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
         },
         {
           "Name": "Content-Length",
@@ -1020,10 +567,6 @@
         {
           "Name": "Last-Modified",
           "Value": "Thu, 17 Apr 2025 19:33:31 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=3600, must-revalidate"
         }
       ],
       "EndpointProperties": [
@@ -1035,12 +578,16 @@
     },
     {
       "Route": "uploads/listing_pictures/5a0fa4f2-567c-4d1b-9963-7238e5d8162b.emk476swkh.jpg",
-      "AssetFile": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\5a0fa4f2-567c-4d1b-9963-7238e5d8162b.jpg",
+      "AssetFile": "uploads/listing_pictures/5a0fa4f2-567c-4d1b-9963-7238e5d8162b.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -1057,10 +604,6 @@
         {
           "Name": "Last-Modified",
           "Value": "Thu, 17 Apr 2025 21:14:48 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -1069,23 +612,27 @@
           "Value": "emk476swkh"
         },
         {
-          "Name": "label",
-          "Value": "uploads/listing_pictures/5a0fa4f2-567c-4d1b-9963-7238e5d8162b.jpg"
-        },
-        {
           "Name": "integrity",
           "Value": "sha256-mr+DwbNySADzt2peEPiBTlUDYOZSLljBYi1NYWv70Vs="
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/listing_pictures/5a0fa4f2-567c-4d1b-9963-7238e5d8162b.jpg"
         }
       ]
     },
     {
       "Route": "uploads/listing_pictures/5a0fa4f2-567c-4d1b-9963-7238e5d8162b.jpg",
-      "AssetFile": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\5a0fa4f2-567c-4d1b-9963-7238e5d8162b.jpg",
+      "AssetFile": "uploads/listing_pictures/5a0fa4f2-567c-4d1b-9963-7238e5d8162b.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
         },
         {
           "Name": "Content-Length",
@@ -1102,10 +649,6 @@
         {
           "Name": "Last-Modified",
           "Value": "Thu, 17 Apr 2025 21:14:48 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=3600, must-revalidate"
         }
       ],
       "EndpointProperties": [
@@ -1117,12 +660,16 @@
     },
     {
       "Route": "uploads/listing_pictures/61d6ed1c-0d64-45f1-a6fe-005813a307b6.qzfqakpl31.webp",
-      "AssetFile": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\61d6ed1c-0d64-45f1-a6fe-005813a307b6.webp",
+      "AssetFile": "uploads/listing_pictures/61d6ed1c-0d64-45f1-a6fe-005813a307b6.webp",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -1139,10 +686,6 @@
         {
           "Name": "Last-Modified",
           "Value": "Thu, 17 Apr 2025 21:20:29 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -1151,23 +694,27 @@
           "Value": "qzfqakpl31"
         },
         {
-          "Name": "label",
-          "Value": "uploads/listing_pictures/61d6ed1c-0d64-45f1-a6fe-005813a307b6.webp"
-        },
-        {
           "Name": "integrity",
           "Value": "sha256-ikLdscULJsGD9ibICfWRC/qmZnRLVkpD5K7KobvRFPY="
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/listing_pictures/61d6ed1c-0d64-45f1-a6fe-005813a307b6.webp"
         }
       ]
     },
     {
       "Route": "uploads/listing_pictures/61d6ed1c-0d64-45f1-a6fe-005813a307b6.webp",
-      "AssetFile": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\61d6ed1c-0d64-45f1-a6fe-005813a307b6.webp",
+      "AssetFile": "uploads/listing_pictures/61d6ed1c-0d64-45f1-a6fe-005813a307b6.webp",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
         },
         {
           "Name": "Content-Length",
@@ -1184,10 +731,6 @@
         {
           "Name": "Last-Modified",
           "Value": "Thu, 17 Apr 2025 21:20:29 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=3600, must-revalidate"
         }
       ],
       "EndpointProperties": [
@@ -1199,12 +742,16 @@
     },
     {
       "Route": "uploads/listing_pictures/7e936e9e-e7f4-4088-bc8f-af7b28e63181.1cm6r28nml.jpg",
-      "AssetFile": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\7e936e9e-e7f4-4088-bc8f-af7b28e63181.jpg",
+      "AssetFile": "uploads/listing_pictures/7e936e9e-e7f4-4088-bc8f-af7b28e63181.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -1221,10 +768,6 @@
         {
           "Name": "Last-Modified",
           "Value": "Tue, 22 Apr 2025 21:54:38 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -1233,23 +776,27 @@
           "Value": "1cm6r28nml"
         },
         {
-          "Name": "label",
-          "Value": "uploads/listing_pictures/7e936e9e-e7f4-4088-bc8f-af7b28e63181.jpg"
-        },
-        {
           "Name": "integrity",
           "Value": "sha256-b8YXnp9tbTWd19f5wiYrE5wVg4VtijcOc4w+/FJYD50="
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/listing_pictures/7e936e9e-e7f4-4088-bc8f-af7b28e63181.jpg"
         }
       ]
     },
     {
       "Route": "uploads/listing_pictures/7e936e9e-e7f4-4088-bc8f-af7b28e63181.jpg",
-      "AssetFile": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\7e936e9e-e7f4-4088-bc8f-af7b28e63181.jpg",
+      "AssetFile": "uploads/listing_pictures/7e936e9e-e7f4-4088-bc8f-af7b28e63181.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
         },
         {
           "Name": "Content-Length",
@@ -1266,10 +813,6 @@
         {
           "Name": "Last-Modified",
           "Value": "Tue, 22 Apr 2025 21:54:38 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=3600, must-revalidate"
         }
       ],
       "EndpointProperties": [
@@ -1281,12 +824,16 @@
     },
     {
       "Route": "uploads/listing_pictures/81b022c5-605a-485c-8a54-6342069ab863.im1jipuxv2.png",
-      "AssetFile": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\81b022c5-605a-485c-8a54-6342069ab863.png",
+      "AssetFile": "uploads/listing_pictures/81b022c5-605a-485c-8a54-6342069ab863.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -1303,10 +850,6 @@
         {
           "Name": "Last-Modified",
           "Value": "Wed, 16 Apr 2025 18:19:04 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -1315,23 +858,27 @@
           "Value": "im1jipuxv2"
         },
         {
-          "Name": "label",
-          "Value": "uploads/listing_pictures/81b022c5-605a-485c-8a54-6342069ab863.png"
-        },
-        {
           "Name": "integrity",
           "Value": "sha256-+gTGGHnRtJ1p+WjmgjS54501o7+p3aGCZXBXyih1RX8="
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/listing_pictures/81b022c5-605a-485c-8a54-6342069ab863.png"
         }
       ]
     },
     {
       "Route": "uploads/listing_pictures/81b022c5-605a-485c-8a54-6342069ab863.png",
-      "AssetFile": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\81b022c5-605a-485c-8a54-6342069ab863.png",
+      "AssetFile": "uploads/listing_pictures/81b022c5-605a-485c-8a54-6342069ab863.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
         },
         {
           "Name": "Content-Length",
@@ -1348,10 +895,6 @@
         {
           "Name": "Last-Modified",
           "Value": "Wed, 16 Apr 2025 18:19:04 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=3600, must-revalidate"
         }
       ],
       "EndpointProperties": [
@@ -1363,12 +906,16 @@
     },
     {
       "Route": "uploads/listing_pictures/8c0d57fd-5960-40d9-a384-9092baeebef7.3azq3vmzdj.png",
-      "AssetFile": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\8c0d57fd-5960-40d9-a384-9092baeebef7.png",
+      "AssetFile": "uploads/listing_pictures/8c0d57fd-5960-40d9-a384-9092baeebef7.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -1385,10 +932,6 @@
         {
           "Name": "Last-Modified",
           "Value": "Tue, 22 Apr 2025 04:51:24 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -1397,23 +940,27 @@
           "Value": "3azq3vmzdj"
         },
         {
-          "Name": "label",
-          "Value": "uploads/listing_pictures/8c0d57fd-5960-40d9-a384-9092baeebef7.png"
-        },
-        {
           "Name": "integrity",
           "Value": "sha256-5evuLakXgryIxmE9Tn9VEbTdUzczXCQM9TfjF6BoP90="
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/listing_pictures/8c0d57fd-5960-40d9-a384-9092baeebef7.png"
         }
       ]
     },
     {
       "Route": "uploads/listing_pictures/8c0d57fd-5960-40d9-a384-9092baeebef7.png",
-      "AssetFile": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\8c0d57fd-5960-40d9-a384-9092baeebef7.png",
+      "AssetFile": "uploads/listing_pictures/8c0d57fd-5960-40d9-a384-9092baeebef7.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
         },
         {
           "Name": "Content-Length",
@@ -1430,10 +977,6 @@
         {
           "Name": "Last-Modified",
           "Value": "Tue, 22 Apr 2025 04:51:24 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=3600, must-revalidate"
         }
       ],
       "EndpointProperties": [
@@ -1445,12 +988,16 @@
     },
     {
       "Route": "uploads/listing_pictures/b9a8fa73-b23b-45d1-ac52-e66c5507af59.mlx5m86wz7.png",
-      "AssetFile": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\b9a8fa73-b23b-45d1-ac52-e66c5507af59.png",
+      "AssetFile": "uploads/listing_pictures/b9a8fa73-b23b-45d1-ac52-e66c5507af59.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -1467,10 +1014,6 @@
         {
           "Name": "Last-Modified",
           "Value": "Wed, 23 Apr 2025 06:09:11 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -1479,23 +1022,27 @@
           "Value": "mlx5m86wz7"
         },
         {
-          "Name": "label",
-          "Value": "uploads/listing_pictures/b9a8fa73-b23b-45d1-ac52-e66c5507af59.png"
-        },
-        {
           "Name": "integrity",
           "Value": "sha256-pnChknrDp6iw4qhiz/XT90FbeoaZURG5ED3jwecG/Fw="
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/listing_pictures/b9a8fa73-b23b-45d1-ac52-e66c5507af59.png"
         }
       ]
     },
     {
       "Route": "uploads/listing_pictures/b9a8fa73-b23b-45d1-ac52-e66c5507af59.png",
-      "AssetFile": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\b9a8fa73-b23b-45d1-ac52-e66c5507af59.png",
+      "AssetFile": "uploads/listing_pictures/b9a8fa73-b23b-45d1-ac52-e66c5507af59.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
         },
         {
           "Name": "Content-Length",
@@ -1512,10 +1059,6 @@
         {
           "Name": "Last-Modified",
           "Value": "Wed, 23 Apr 2025 06:09:11 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=3600, must-revalidate"
         }
       ],
       "EndpointProperties": [
@@ -1527,12 +1070,16 @@
     },
     {
       "Route": "uploads/listing_pictures/d89cc814-5b2f-4f69-b4d5-999edb6f876d.1cm6r28nml.jpg",
-      "AssetFile": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\d89cc814-5b2f-4f69-b4d5-999edb6f876d.jpg",
+      "AssetFile": "uploads/listing_pictures/d89cc814-5b2f-4f69-b4d5-999edb6f876d.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -1549,10 +1096,6 @@
         {
           "Name": "Last-Modified",
           "Value": "Thu, 24 Apr 2025 20:43:31 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -1561,23 +1104,27 @@
           "Value": "1cm6r28nml"
         },
         {
-          "Name": "label",
-          "Value": "uploads/listing_pictures/d89cc814-5b2f-4f69-b4d5-999edb6f876d.jpg"
-        },
-        {
           "Name": "integrity",
           "Value": "sha256-b8YXnp9tbTWd19f5wiYrE5wVg4VtijcOc4w+/FJYD50="
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/listing_pictures/d89cc814-5b2f-4f69-b4d5-999edb6f876d.jpg"
         }
       ]
     },
     {
       "Route": "uploads/listing_pictures/d89cc814-5b2f-4f69-b4d5-999edb6f876d.jpg",
-      "AssetFile": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\d89cc814-5b2f-4f69-b4d5-999edb6f876d.jpg",
+      "AssetFile": "uploads/listing_pictures/d89cc814-5b2f-4f69-b4d5-999edb6f876d.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
         },
         {
           "Name": "Content-Length",
@@ -1594,10 +1141,6 @@
         {
           "Name": "Last-Modified",
           "Value": "Thu, 24 Apr 2025 20:43:31 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=3600, must-revalidate"
         }
       ],
       "EndpointProperties": [
@@ -1609,12 +1152,16 @@
     },
     {
       "Route": "uploads/listing_pictures/dd145f53-cc8c-4df9-b7ad-18f8dd38e158.1cm6r28nml.jpg",
-      "AssetFile": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\dd145f53-cc8c-4df9-b7ad-18f8dd38e158.jpg",
+      "AssetFile": "uploads/listing_pictures/dd145f53-cc8c-4df9-b7ad-18f8dd38e158.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -1631,10 +1178,6 @@
         {
           "Name": "Last-Modified",
           "Value": "Tue, 22 Apr 2025 21:53:12 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -1643,23 +1186,27 @@
           "Value": "1cm6r28nml"
         },
         {
-          "Name": "label",
-          "Value": "uploads/listing_pictures/dd145f53-cc8c-4df9-b7ad-18f8dd38e158.jpg"
-        },
-        {
           "Name": "integrity",
           "Value": "sha256-b8YXnp9tbTWd19f5wiYrE5wVg4VtijcOc4w+/FJYD50="
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/listing_pictures/dd145f53-cc8c-4df9-b7ad-18f8dd38e158.jpg"
         }
       ]
     },
     {
       "Route": "uploads/listing_pictures/dd145f53-cc8c-4df9-b7ad-18f8dd38e158.jpg",
-      "AssetFile": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\dd145f53-cc8c-4df9-b7ad-18f8dd38e158.jpg",
+      "AssetFile": "uploads/listing_pictures/dd145f53-cc8c-4df9-b7ad-18f8dd38e158.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
         },
         {
           "Name": "Content-Length",
@@ -1676,10 +1223,6 @@
         {
           "Name": "Last-Modified",
           "Value": "Tue, 22 Apr 2025 21:53:12 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=3600, must-revalidate"
         }
       ],
       "EndpointProperties": [
@@ -1691,12 +1234,16 @@
     },
     {
       "Route": "uploads/listing_pictures/default-avatar.jpeg",
-      "AssetFile": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\default-avatar.jpeg",
+      "AssetFile": "uploads/listing_pictures/default-avatar.jpeg",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
         },
         {
           "Name": "Content-Length",
@@ -1713,10 +1260,6 @@
         {
           "Name": "Last-Modified",
           "Value": "Mon, 14 Oct 2024 20:19:55 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=3600, must-revalidate"
         }
       ],
       "EndpointProperties": [
@@ -1728,12 +1271,16 @@
     },
     {
       "Route": "uploads/listing_pictures/default-avatar.vop441ff9u.jpeg",
-      "AssetFile": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\default-avatar.jpeg",
+      "AssetFile": "uploads/listing_pictures/default-avatar.jpeg",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -1750,10 +1297,6 @@
         {
           "Name": "Last-Modified",
           "Value": "Mon, 14 Oct 2024 20:19:55 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -1762,23 +1305,27 @@
           "Value": "vop441ff9u"
         },
         {
-          "Name": "label",
-          "Value": "uploads/listing_pictures/default-avatar.jpeg"
-        },
-        {
           "Name": "integrity",
           "Value": "sha256-8czCbi9iLVzl/QzColmD60oCtlif8LeTnULWxYnb3MY="
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/listing_pictures/default-avatar.jpeg"
         }
       ]
     },
     {
       "Route": "uploads/listing_pictures/f2b744fc-66e7-4582-9aaa-90bfcea27cc1.11vooa5jo1.png",
-      "AssetFile": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\f2b744fc-66e7-4582-9aaa-90bfcea27cc1.png",
+      "AssetFile": "uploads/listing_pictures/f2b744fc-66e7-4582-9aaa-90bfcea27cc1.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -1795,10 +1342,6 @@
         {
           "Name": "Last-Modified",
           "Value": "Tue, 22 Apr 2025 21:46:26 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -1807,23 +1350,27 @@
           "Value": "11vooa5jo1"
         },
         {
-          "Name": "label",
-          "Value": "uploads/listing_pictures/f2b744fc-66e7-4582-9aaa-90bfcea27cc1.png"
-        },
-        {
           "Name": "integrity",
           "Value": "sha256-67y2T+jp2myOKLWxAy4iby1oHpmU52vrqe9uH80QWOg="
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/listing_pictures/f2b744fc-66e7-4582-9aaa-90bfcea27cc1.png"
         }
       ]
     },
     {
       "Route": "uploads/listing_pictures/f2b744fc-66e7-4582-9aaa-90bfcea27cc1.png",
-      "AssetFile": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\f2b744fc-66e7-4582-9aaa-90bfcea27cc1.png",
+      "AssetFile": "uploads/listing_pictures/f2b744fc-66e7-4582-9aaa-90bfcea27cc1.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
         },
         {
           "Name": "Content-Length",
@@ -1840,10 +1387,6 @@
         {
           "Name": "Last-Modified",
           "Value": "Tue, 22 Apr 2025 21:46:26 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=3600, must-revalidate"
         }
       ],
       "EndpointProperties": [
@@ -1855,12 +1398,16 @@
     },
     {
       "Route": "uploads/listing_pictures/f6752f65-4daf-47f9-ada7-9c9682549a3d.n6hkizru4o.png",
-      "AssetFile": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\f6752f65-4daf-47f9-ada7-9c9682549a3d.png",
+      "AssetFile": "uploads/listing_pictures/f6752f65-4daf-47f9-ada7-9c9682549a3d.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -1877,10 +1424,6 @@
         {
           "Name": "Last-Modified",
           "Value": "Wed, 16 Apr 2025 18:20:22 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -1889,23 +1432,27 @@
           "Value": "n6hkizru4o"
         },
         {
-          "Name": "label",
-          "Value": "uploads/listing_pictures/f6752f65-4daf-47f9-ada7-9c9682549a3d.png"
-        },
-        {
           "Name": "integrity",
           "Value": "sha256-/4FGCXgPcm4FAif0I2sRUVh1RTNR1CAUL68dyaaRvaw="
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/listing_pictures/f6752f65-4daf-47f9-ada7-9c9682549a3d.png"
         }
       ]
     },
     {
       "Route": "uploads/listing_pictures/f6752f65-4daf-47f9-ada7-9c9682549a3d.png",
-      "AssetFile": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\f6752f65-4daf-47f9-ada7-9c9682549a3d.png",
+      "AssetFile": "uploads/listing_pictures/f6752f65-4daf-47f9-ada7-9c9682549a3d.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
         },
         {
           "Name": "Content-Length",
@@ -1922,10 +1469,6 @@
         {
           "Name": "Last-Modified",
           "Value": "Wed, 16 Apr 2025 18:20:22 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=3600, must-revalidate"
         }
       ],
       "EndpointProperties": [
@@ -1937,12 +1480,16 @@
     },
     {
       "Route": "uploads/listing_pictures/f785e2e0-1451-4107-bf6d-d6758057e98e.iifzz5abs6.jpg",
-      "AssetFile": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\f785e2e0-1451-4107-bf6d-d6758057e98e.jpg",
+      "AssetFile": "uploads/listing_pictures/f785e2e0-1451-4107-bf6d-d6758057e98e.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -1959,10 +1506,6 @@
         {
           "Name": "Last-Modified",
           "Value": "Tue, 22 Apr 2025 05:39:44 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -1971,23 +1514,27 @@
           "Value": "iifzz5abs6"
         },
         {
-          "Name": "label",
-          "Value": "uploads/listing_pictures/f785e2e0-1451-4107-bf6d-d6758057e98e.jpg"
-        },
-        {
           "Name": "integrity",
           "Value": "sha256-ti85GdiQM1Oc5ybzI/KQME4WMQ+9eTklCWRv0EyeVu8="
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/listing_pictures/f785e2e0-1451-4107-bf6d-d6758057e98e.jpg"
         }
       ]
     },
     {
       "Route": "uploads/listing_pictures/f785e2e0-1451-4107-bf6d-d6758057e98e.jpg",
-      "AssetFile": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\f785e2e0-1451-4107-bf6d-d6758057e98e.jpg",
+      "AssetFile": "uploads/listing_pictures/f785e2e0-1451-4107-bf6d-d6758057e98e.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
         },
         {
           "Name": "Content-Length",
@@ -2004,10 +1551,6 @@
         {
           "Name": "Last-Modified",
           "Value": "Tue, 22 Apr 2025 05:39:44 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=3600, must-revalidate"
         }
       ],
       "EndpointProperties": [
@@ -2019,12 +1562,16 @@
     },
     {
       "Route": "uploads/profile_pictures/default-avatar.jpeg",
-      "AssetFile": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\profile_pictures\\default-avatar.jpeg",
+      "AssetFile": "uploads/profile_pictures/default-avatar.jpeg",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
         },
         {
           "Name": "Content-Length",
@@ -2041,10 +1588,6 @@
         {
           "Name": "Last-Modified",
           "Value": "Mon, 14 Oct 2024 20:19:55 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=3600, must-revalidate"
         }
       ],
       "EndpointProperties": [
@@ -2056,12 +1599,16 @@
     },
     {
       "Route": "uploads/profile_pictures/default-avatar.vop441ff9u.jpeg",
-      "AssetFile": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\profile_pictures\\default-avatar.jpeg",
+      "AssetFile": "uploads/profile_pictures/default-avatar.jpeg",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -2078,10 +1625,6 @@
         {
           "Name": "Last-Modified",
           "Value": "Mon, 14 Oct 2024 20:19:55 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -2090,23 +1633,27 @@
           "Value": "vop441ff9u"
         },
         {
-          "Name": "label",
-          "Value": "uploads/profile_pictures/default-avatar.jpeg"
-        },
-        {
           "Name": "integrity",
           "Value": "sha256-8czCbi9iLVzl/QzColmD60oCtlif8LeTnULWxYnb3MY="
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/profile_pictures/default-avatar.jpeg"
         }
       ]
     },
     {
       "Route": "uploads/profile_pictures/f49ce756-aa1a-486d-8dea-9631427d60e1.qzfqakpl31.webp",
-      "AssetFile": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\profile_pictures\\f49ce756-aa1a-486d-8dea-9631427d60e1.webp",
+      "AssetFile": "uploads/profile_pictures/f49ce756-aa1a-486d-8dea-9631427d60e1.webp",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -2123,10 +1670,6 @@
         {
           "Name": "Last-Modified",
           "Value": "Wed, 16 Apr 2025 05:10:56 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -2135,23 +1678,27 @@
           "Value": "qzfqakpl31"
         },
         {
-          "Name": "label",
-          "Value": "uploads/profile_pictures/f49ce756-aa1a-486d-8dea-9631427d60e1.webp"
-        },
-        {
           "Name": "integrity",
           "Value": "sha256-ikLdscULJsGD9ibICfWRC/qmZnRLVkpD5K7KobvRFPY="
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/profile_pictures/f49ce756-aa1a-486d-8dea-9631427d60e1.webp"
         }
       ]
     },
     {
       "Route": "uploads/profile_pictures/f49ce756-aa1a-486d-8dea-9631427d60e1.webp",
-      "AssetFile": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\profile_pictures\\f49ce756-aa1a-486d-8dea-9631427d60e1.webp",
+      "AssetFile": "uploads/profile_pictures/f49ce756-aa1a-486d-8dea-9631427d60e1.webp",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
         },
         {
           "Name": "Content-Length",
@@ -2168,10 +1715,6 @@
         {
           "Name": "Last-Modified",
           "Value": "Wed, 16 Apr 2025 05:10:56 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=3600, must-revalidate"
         }
       ],
       "EndpointProperties": [

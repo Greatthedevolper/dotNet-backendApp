@@ -1,46 +1,61 @@
-using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using DotNetApi.Data;
 using DotNetApi.Models;
 using DotNetApi.Services;
-using DotNetApi.Data;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DotNetApi.Controllers
 {
     [ApiController]
     [Route("api/listings")]
-    public class ListingController : ControllerBase
+    public class ListingController(
+        UserRepository userRepository,
+        EmailService emailService,
+        ListingRepository listingRepository
+    ) : ControllerBase
     {
-        private readonly ListingRepository _listingRepository;
-        private readonly UserRepository _userRepository;
-        private readonly EmailService _emailService;
-
-        public ListingController(UserRepository userRepository, EmailService emailService, ListingRepository listingRepository)
-        {
-            _userRepository = userRepository;
-            _listingRepository = listingRepository;
-            _emailService = emailService;
-        }
-
+        private readonly ListingRepository _listingRepository = listingRepository;
+        private readonly UserRepository _userRepository = userRepository;
+        private readonly EmailService _emailService = emailService;
 
         [HttpGet]
-        public ActionResult<object> GetListings([FromQuery] int page = 1, [FromQuery] int pageSize = 10, [FromQuery] string search = "")
+        public ActionResult<object> GetListings(
+            [FromQuery] int page = 1,
+            [FromQuery] int pageSize = 10,
+            [FromQuery] string search = "",
+            [FromQuery] string order = "asc",
+            [FromQuery] string orderBy = ""
+        )
         {
-            var result = _listingRepository.GetAllListings(page, pageSize, search, HttpContext.Request);
+            var result = _listingRepository.GetAllListings(
+                page,
+                pageSize,
+                search,
+                order,
+                orderBy,
+                HttpContext.Request
+            );
 
             if (result == null || result.Data == null || ((dynamic)result.Data).listings.Count == 0)
             {
-                return NotFound(new
-                {
-                    message = "No listings found.",
-                    statusCode = 404,
-                    data = new { listings = new List<Listing>(), top4Listings = new List<object>() },
-                    currentPage = page,
-                    pageSize = pageSize,
-                    totalCount = 0,
-                    totalPages = 0,
-                    hasPrevious = false,
-                    hasNext = false
-                });
+                return NotFound(
+                    new
+                    {
+                        message = "No listings found.",
+                        statusCode = 404,
+                        data = new
+                        {
+                            listings = new List<Listing>(),
+                            top4Listings = new List<object>(),
+                        },
+                        currentPage = page,
+                        pageSize = pageSize,
+                        totalCount = 0,
+                        totalPages = 0,
+                        hasPrevious = false,
+                        hasNext = false,
+                    }
+                );
             }
 
             return Ok(result);
@@ -54,24 +69,29 @@ namespace DotNetApi.Controllers
                 return BadRequest(new { status = false, message = "Invalid listing ID." });
             }
 
-            var (listing, currentUser,currentCategory) = _listingRepository.GetSingleListing(id, Request);
+            var (listing, currentUser, currentCategory) = _listingRepository.GetSingleListing(
+                id,
+                Request
+            );
 
             if (listing == null)
             {
                 return NotFound(new { status = false, message = "No listing was found." });
             }
 
-            return Ok(new
-            {
-                status = true,
-                message = "Listing found.",
-                data = new
+            return Ok(
+                new
                 {
-                    listing,
-                    user = currentUser,
-                    category=currentCategory
+                    status = true,
+                    message = "Listing found.",
+                    data = new
+                    {
+                        listing,
+                        user = currentUser,
+                        category = currentCategory,
+                    },
                 }
-            });
+            );
         }
 
         [HttpPost]
@@ -83,7 +103,9 @@ namespace DotNetApi.Controllers
             // Validate required fields for new listings
             if (dto.Id == 0 && dto.ImageFile == null && string.IsNullOrEmpty(dto.ExistingImage))
             {
-                return BadRequest(new { status = false, message = "Image is required for new listings." });
+                return BadRequest(
+                    new { status = false, message = "Image is required for new listings." }
+                );
             }
 
             // Convert DTO to Listing model
@@ -111,33 +133,42 @@ namespace DotNetApi.Controllers
 
                 if (isSaved)
                 {
-                    return Ok(new
-                    {
-                        status = true,
-                        message = listing.Id == 0 ? "Listing created successfully." : "Listing updated successfully."
-                    });
+                    return Ok(
+                        new
+                        {
+                            status = true,
+                            message = listing.Id == 0
+                                ? "Listing created successfully."
+                                : "Listing updated successfully.",
+                        }
+                    );
                 }
                 else
                 {
-                    return StatusCode(500, new
-                    {
-                        status = false,
-                        message = "An error occurred while saving the listing."
-                    });
+                    return StatusCode(
+                        500,
+                        new
+                        {
+                            status = false,
+                            message = "An error occurred while saving the listing.",
+                        }
+                    );
                 }
             }
             catch (Exception ex)
             {
                 // Log the exception here
-                return StatusCode(500, new
-                {
-                    status = false,
-                    message = "An unexpected error occurred.",
-                    error = ex.Message // Only include in development environment
-                });
+                return StatusCode(
+                    500,
+                    new
+                    {
+                        status = false,
+                        message = "An unexpected error occurred.",
+                        error = ex.Message, // Only include in development environment
+                    }
+                );
             }
         }
-
 
         public class ListingFormDto
         {
@@ -169,6 +200,7 @@ namespace DotNetApi.Controllers
             }
             return BadRequest(new { status = false, message = "Invalid listing ID." });
         }
+
         [HttpDelete("/api/listing/{id}")]
         public IActionResult ListingDelete(int Id)
         {

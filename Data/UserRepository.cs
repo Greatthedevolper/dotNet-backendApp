@@ -245,7 +245,7 @@ namespace DotNetApi.Data
                     checkCmd.Parameters.AddWithValue("@Email", email);
                     checkCmd.Parameters.AddWithValue("@Token", token);
 
-                    object result = checkCmd.ExecuteScalar();
+                    object? result = checkCmd.ExecuteScalar();
                     if (result == null)
                     {
                         return false; // No matching user found

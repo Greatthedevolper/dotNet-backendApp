@@ -1,8 +1,8 @@
-using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using DotNetApi.Data;
 using DotNetApi.Models;
 using DotNetApi.Services;
-using DotNetApi.Data;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DotNetApi.Controllers
 {
@@ -19,7 +19,6 @@ namespace DotNetApi.Controllers
             _emailService = emailService;
         }
 
-
         [HttpGet]
         public ActionResult<object> GetListings(string search = "")
         {
@@ -27,18 +26,21 @@ namespace DotNetApi.Controllers
 
             if (result?.Count == 0 || result == null)
             {
-                return NotFound(new
-                {
-                    message = "No listings found.",
-                    statusCode = 404,
-                    data = new { categories = new List<Category>() },
-                });
+                return NotFound(
+                    new
+                    {
+                        message = "No listings found.",
+                        statusCode = 404,
+                        data = new { categories = new List<Category>() },
+                    }
+                );
             }
 
             return Ok(result);
         }
+
         [HttpPost]
-        public IActionResult CreateCategory([FromQuery] string name,string description)
+        public IActionResult CreateCategory([FromQuery] string name, string description)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -46,9 +48,11 @@ namespace DotNetApi.Controllers
             }
             if (string.IsNullOrEmpty(description))
             {
-                return BadRequest(new { status = false, message = "category description is required." });
+                return BadRequest(
+                    new { status = false, message = "category description is required." }
+                );
             }
-            var isAdded = _categoryRepository.SaveCategory(name,description);
+            var isAdded = _categoryRepository.SaveCategory(name, description);
 
             if (isAdded)
             {
@@ -57,8 +61,5 @@ namespace DotNetApi.Controllers
 
             return StatusCode(500, new { status = false, message = "Category creation failed." });
         }
-
-
-
     }
 }

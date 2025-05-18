@@ -53,6 +53,10 @@
       "PackagePath": "staticwebassets\\uploads\\listing_pictures\\b9a8fa73-b23b-45d1-ac52-e66c5507af59.png"
     },
     {
+      "Id": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\d89cc814-5b2f-4f69-b4d5-999edb6f876d.jpg",
+      "PackagePath": "staticwebassets\\uploads\\listing_pictures\\d89cc814-5b2f-4f69-b4d5-999edb6f876d.jpg"
+    },
+    {
       "Id": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\listing_pictures\\dd145f53-cc8c-4df9-b7ad-18f8dd38e158.jpg",
       "PackagePath": "staticwebassets\\uploads\\listing_pictures\\dd145f53-cc8c-4df9-b7ad-18f8dd38e158.jpg"
     },
@@ -79,6 +83,10 @@
     {
       "Id": "D:\\All-Projects\\DotNet\\fullstack-app\\DotnetApi\\wwwroot\\uploads\\profile_pictures\\f49ce756-aa1a-486d-8dea-9631427d60e1.webp",
       "PackagePath": "staticwebassets\\uploads\\profile_pictures\\f49ce756-aa1a-486d-8dea-9631427d60e1.webp"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.DotnetApi.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.DotnetApi.Microsoft.AspNetCore.StaticWebAssets.props",
